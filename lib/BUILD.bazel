@@ -1,0 +1,93 @@
+EXTRA_DIST = [
+    "allocator.h",
+    "argmatch.h",
+    "basename-lgpl.h",
+    "file-type.h",
+    "c-strcase.h",
+
+    "exitfail.h",
+    "filename.h",
+
+    "getprogname.h",
+
+    "ignore-value.h",
+    "intprops-internal.h",
+    "intprops.h",
+
+    "quote.h",
+    "quotearg.h",
+    "unlocked-io.h",
+]
+
+BUILT_SOURCES = [
+    "fcntl.h",
+    "sigsegv.h",
+
+    "stdlib.h",
+    "string.h",
+
+    "sys/stat.h",
+
+    "uchar.h",
+
+    "wchar.h",
+]
+
+# libdiffutils_a_SOURCES
+SOURCES = [
+    "allocator.c",
+    "argmatch.c",
+    "openat-priv.h",
+    "openat-proc.c",
+    "basename-lgpl.c",
+    "binary-io.h",
+    "binary-io.c",
+    "bitrotate.h",
+    "bitrotate.c",
+    "btoc32.c",
+    "btowc.c",
+    "c-ctype.h",
+    "c-ctype.c",
+    "c-file-type.c",
+    "gettext.h",
+    "c-stack.h",
+    "c-stack.c",
+    "c-strcasecmp.c",
+    "c32_apply_type_test.c",
+
+    "getprogname.c",
+
+    "idx.h",
+
+    "stdlib.c",
+]
+
+cc_library(
+    name = "diffutils",
+    srcs = BUILT_SOURCES + SOURCES + [
+        "config.h",
+    ],
+    hdrs = EXTRA_DIST,
+    includes = ["."],
+)
+
+
+# cc_library(
+#   name = "diffutils",
+#   srcs = [
+#       "config.h",
+#   ] + glob(["**/*.c"], ["fnmatch_loop.c", "xstrtol.c"]),
+#   # deps = [":config"],
+#   hdrs = glob(["**/*.h"], ["config.h"]),
+#   includes = ["./"],
+#   textual_hdrs = ["fnmatch_loop.c", "xstrtol.c"],
+#   visibility = ["//src:__subpackages__"],
+#   # defines = ["_GL_CONFIG_H_INCLUDED"]
+#   # alwayslink = True,
+# )
+
+# cc_library(
+#     name = "config",
+#     hdrs = ["config.h"],
+#     visibility = ["//src:__subpackages__"],
+# )

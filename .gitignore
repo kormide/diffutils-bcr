@@ -1,6 +1,7 @@
 *.Po
 *.o
 *.a
+bazel-*
 src/diff
 src/diff3
 src/cmp

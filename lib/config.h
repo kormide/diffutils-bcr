@@ -211,7 +211,7 @@
        && !defined __MINGW32__
    # define _FORTIFY_SOURCE 2
    #endif
-  
+
 
 /* Define to 1 if fflush is known to work on stdin as per POSIX.1-2008 or
    later, 0 if fflush is known to not work, -1 if unknown. */
@@ -1925,7 +1925,7 @@
 #elif HAVE___BUILTIN_EXPECT == 2
 # include <builtins.h>
 #endif
-    
+
 
 /* Define to 1 if ctype.h defines __header_inline. */
 /* #undef HAVE___HEADER_INLINE */
@@ -3550,7 +3550,7 @@
   # else
   #  define _UC_RESTRICT
   # endif
-  
+
 
 /* Define as a macro for copying va_list variables. */
 /* #undef va_copy */
