@@ -1,1 +1,8 @@
 *.Po
+*.o
+*.a
+src/diff
+src/diff3
+src/cmp
+src/sdiff
+gnulib-tests
