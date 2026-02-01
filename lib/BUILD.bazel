@@ -180,17 +180,51 @@ EXTRA_DIST = [
 ]
 
 BUILT_SOURCES = [
+    "alloca.h",
+    "assert.h",
+    "ctype.h",
+    "dirent.h",
+    "errno.h",
+    "error.h",
     "fcntl.h",
+    "fnmatch.h",
+    "getopt.h",
+    "getopt_cdefs.h",
+    "malloc/dynarray.gl.h",
+    "malloc/dynarray-skeleton.gl.h",
+    "inttypes.h",
+    "langinfo.h",
+    "limits.h",
+    "locale.h",
+    "pthread.h",
+    "sched.h",
+    "signal.h",
     "sigsegv.h",
-
+    "stdarg.h",
+    "stdbit.h",
+    "stdckdint.h",
+    "stddef.h",
+    "stdint.h",
+    "stdio.h",
     "stdlib.h",
     "string.h",
-
+    "strings.h",
+    "sys/random.h",
     "sys/stat.h",
-
+    "sys/time.h",
+    "sys/types.h",
+    "sys/wait.h",
+    "time.h",
     "uchar.h",
-
+    "unicase.h",
+    "unictype.h",
+    "uninorm.h",
+    "unistd.h",
+    "unistr.h",
+    "unitypes.h",
+    "uniwidth.h",
     "wchar.h",
+    "wctype.h",
 ]
 
 # libdiffutils_a_SOURCES
