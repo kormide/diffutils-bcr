@@ -56,6 +56,22 @@ cc_binary(
   includes = ["../lib"],
 )
 
+cc_binary(
+  name = "diff3",
+  srcs = [
+      "diff3.c",
+      "paths.h",
+      "system.c",
+  ] + [
+      "system.h",
+  ],
+  deps = [
+      "//lib:diffutils",
+      ":ver",
+  ],
+  includes = ["../lib"],
+)
+
 cc_library(
     name = "ver",
     srcs = ["version.c", "version.h"],
