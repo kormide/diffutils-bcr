@@ -24,6 +24,23 @@ cc_binary(
   includes = ["../lib"],
 )
 
+cc_binary(
+  name = "cmp",
+  srcs = [
+      "cmp.c",
+      "paths.h",
+      "system.c",
+  ] + [
+      "system.h",
+  ],
+  deps = [
+      "//lib:diffutils",
+      ":ver",
+  ],
+  includes = ["../lib"],
+)
+
+
 cc_library(
     name = "ver",
     srcs = ["version.c", "version.h"],

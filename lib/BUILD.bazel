@@ -415,7 +415,6 @@ cc_library(
     name = "diffutils",
     srcs = BUILT_SOURCES + SOURCES + noinst_HEADERS +
     # EXTRA_libdiffutils_a_SOURCES +
-    # [ "fopen.c", "fcntl.c" ] +
     [
         "config.h",
     ],
