@@ -9,6 +9,7 @@ cc_binary(
       "ifdef.c",
       "io.c",
       "normal.c",
+      "paths.h",
       "side.c",
       "system.c",
       "util.c"
@@ -27,6 +28,6 @@ cc_library(
     name = "ver",
     srcs = ["version.c", "version.h"],
     hdrs = ["version.h"],
-    deps = ["//lib:config"],
+    deps = ["//lib:diffutils"],
     includes = [".", "../lib"],
 )
