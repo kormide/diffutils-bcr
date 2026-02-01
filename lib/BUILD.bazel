@@ -228,7 +228,7 @@ BUILT_SOURCES = [
 ]
 
 # libdiffutils_a_SOURCES
-SOURCES = [
+am__libdiffutils_a_SOURCES_DIST = [
     "allocator.c",
     "argmatch.c",
     "openat-priv.h",
@@ -239,7 +239,7 @@ SOURCES = [
     "bitrotate.h",
     "bitrotate.c",
     "btoc32.c",
-    # "btow.c",
+    "btowc.c",
     "c-ctype.h",
     "c-ctype.c",
     "c-file-type.c",
@@ -372,24 +372,24 @@ SOURCES = [
 ]
 
 EXTRA_libdiffutils_a_SOURCES = [
-    # "calloc.c",
-    # "fnmatch.c",
+    "calloc.c",
+    "fnmatch.c",
     # "fnmatch_loop.c",
     "fopen.c",
     # "at-func.c",
     # "malloc/dynarray-skeleton.c",
-    # "malloc.c",
-    # "lc-charset-dispatch.c",
-    # "mbtowc-lock.c",
-    # "mbsrtoc32s-state.c",
-    # "mbsrtowcs-state.c",
-    # "mktime.c",
+    "malloc.c",
+    "lc-charset-dispatch.c",
+    "mbtowc-lock.c",
+    "mbsrtoc32s-state.c",
+    "mbsrtowcs-state.c",
+    "mktime.c",
     # "strftime.c",
     # "regcomp.c",
     # "regex_internal.c",
     # "regexec.c",
-    # "stat-w32.c",
-    # "strtol.c",
+    "stat-w32.c",
+    "strtol.c",
 ]
 
 noinst_HEADERS = [
@@ -397,31 +397,31 @@ noinst_HEADERS = [
     "diagnose.h",
 ]
 
-cc_library(
-    name = "diffutils-fopen",
-    srcs = [
-        "fopen.c",
-        "config.h",
-        "stdio.h",
-        "fcntl.h",
-        "unistd.h",
-        "sys/types.h",
-        "sys/stat.h",
-    ],
-    includes = ["."]
-)
+# cc_library(
+#     name = "diffutils-fopen",
+#     srcs = [
+#         "fopen.c",
+#         "config.h",
+#         "stdio.h",
+#         "fcntl.h",
+#         "unistd.h",
+#         "sys/types.h",
+#         "sys/stat.h",
+#     ],
+#     includes = ["."]
+# )
 
 cc_library(
     name = "diffutils",
-    srcs = BUILT_SOURCES + SOURCES + noinst_HEADERS +
-    # EXTRA_libdiffutils_a_SOURCES +
+    srcs = BUILT_SOURCES + am__libdiffutils_a_SOURCES_DIST +
+    EXTRA_libdiffutils_a_SOURCES +
     [
         "config.h",
     ],
     deps = [
-        ":diffutils-fopen"
+        # ":diffutils-fopen"
     ],
-    hdrs = EXTRA_DIST,
+    hdrs = EXTRA_DIST + noinst_HEADERS,
     textual_hdrs = ["xstrtol.c"],
     includes = ["."],
     visibility = ["//src:__subpackages__"]
