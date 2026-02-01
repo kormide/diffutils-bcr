@@ -272,7 +272,7 @@ SOURCES = [
     "stripslash.c",
     "exclude.c",
     "exitfail.c",
-    # "fnctl.c",
+    "fcntl.c",
     "fd-hook.c",
     "filenamecat.c",
     "filenamecat-lgpl.c",
@@ -372,34 +372,24 @@ SOURCES = [
 ]
 
 EXTRA_libdiffutils_a_SOURCES = [
-    "calloc.c",
     # "calloc.c",
-    # "stripslash.c",
-    "fnmatch.c",
-    "fnmatch_loop.c",
     # "fnmatch.c",
+    # "fnmatch_loop.c",
     "fopen.c",
-    # "fopen.c",
-    # "stat-w32.c",
-    "at-func.c",
-    "malloc/dynarray-skeleton.c",
+    # "at-func.c",
+    # "malloc/dynarray-skeleton.c",
     # "malloc.c",
-    "malloc.c",
     # "lc-charset-dispatch.c",
     # "mbtowc-lock.c",
-    "lc-charset-dispatch.c",
-    "mbtowc-lock.c",
-    "mbsrtoc32s-state.c",
-    "mbsrtowcs-state.c",
+    # "mbsrtoc32s-state.c",
+    # "mbsrtowcs-state.c",
     # "mktime.c",
-    "mktime.c",
-    "strftime.c",
-    # "at-func.c",
-    "regcomp.c",
-    "regex_internal.c",
-    "regexec.c",
-    "stat-w32.c",
-    "strtol.c",
+    # "strftime.c",
+    # "regcomp.c",
+    # "regex_internal.c",
+    # "regexec.c",
+    # "stat-w32.c",
+    # "strtol.c",
 ]
 
 noinst_HEADERS = [
@@ -408,12 +398,29 @@ noinst_HEADERS = [
 ]
 
 cc_library(
+    name = "diffutils-fopen",
+    srcs = [
+        "fopen.c",
+        "config.h",
+        "stdio.h",
+        "fcntl.h",
+        "unistd.h",
+        "sys/types.h",
+        "sys/stat.h",
+    ],
+    includes = ["."]
+)
+
+cc_library(
     name = "diffutils",
     srcs = BUILT_SOURCES + SOURCES + noinst_HEADERS +
-    # + EXTRA_libdiffutils_a_SOURCES
-    [ "fopen.c", "fcntl.c" ] +
+    # EXTRA_libdiffutils_a_SOURCES +
+    # [ "fopen.c", "fcntl.c" ] +
     [
         "config.h",
+    ],
+    deps = [
+        ":diffutils-fopen"
     ],
     hdrs = EXTRA_DIST,
     textual_hdrs = ["xstrtol.c"],
