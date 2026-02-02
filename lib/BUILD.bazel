@@ -37,7 +37,7 @@ EXTRA_DIST = [
     "fnmatch_loop.c",
     "fnmatch.c",
     # "fnmatch.h",
-    "fopen.c",
+    # "fopen.c",
     "at-func.c",
     "getlocalename_l-unsafe.h",
     # "getopt-cdefs.h",
@@ -75,12 +75,12 @@ EXTRA_DIST = [
     "mbtowc-lock.h",
     "windows-initguard.h",
     "mbrtowc-impl-utf8.h",
-    "mbsrtoc32s-state.c",
+    # "mbsrtoc32s-state.c",
     "mbsrtowcs-impl.h",
-    "mbsrtowcs-state.c",
+    # "mbsrtowcs-state.c",
     "mbtowc-impl.h",
     "mktime-internal.h",
-    "mktime.c",
+    # "mktime.c",
     "msvc-inval.h",
     "msvc-nothrow.h",
     "strftime.c",
@@ -227,8 +227,7 @@ BUILT_SOURCES = [
     "wctype.h",
 ]
 
-# libdiffutils_a_SOURCES
-am__libdiffutils_a_SOURCES_DIST = [
+libdiffutils_a_SOURCES = [
     "allocator.c",
     "argmatch.c",
     "openat-priv.h",
@@ -375,15 +374,15 @@ EXTRA_libdiffutils_a_SOURCES = [
     "calloc.c",
     "fnmatch.c",
     # "fnmatch_loop.c",
-    "fopen.c",
+    # "fopen.c",
     # "at-func.c",
     # "malloc/dynarray-skeleton.c",
     "malloc.c",
     "lc-charset-dispatch.c",
     "mbtowc-lock.c",
-    "mbsrtoc32s-state.c",
-    "mbsrtowcs-state.c",
-    "mktime.c",
+    # "mbsrtoc32s-state.c",
+    # "mbsrtowcs-state.c",
+    # "mktime.c",
     # "strftime.c",
     # "regcomp.c",
     # "regex_internal.c",
@@ -397,29 +396,64 @@ noinst_HEADERS = [
     "diagnose.h",
 ]
 
-# cc_library(
-#     name = "diffutils-fopen",
-#     srcs = [
-#         "fopen.c",
-#         "config.h",
-#         "stdio.h",
-#         "fcntl.h",
-#         "unistd.h",
-#         "sys/types.h",
-#         "sys/stat.h",
-#     ],
-#     includes = ["."]
-# )
+cc_library(
+    name = "diffutils_a-fopen",
+    srcs = [
+        "fopen.c",
+        "config.h",
+        "stdio.h",
+        "fcntl.h",
+        # "unistd.h",
+        # "sys/types.h",
+        # "sys/stat.h",
+    ],
+    includes = ["."]
+)
+
+cc_library(
+    name = "diffutils_a-mbsrtoc32s-state",
+    srcs = [
+        "mbsrtoc32s-state.c",
+        "config.h",
+    ],
+    includes = ["."]
+)
+
+cc_library(
+    name = "diffutils_a-mbsrtowcs-state",
+    srcs = [
+        "mbsrtowcs-state.c",
+        "config.h",
+    ],
+    includes = ["."]
+)
+
+cc_library(
+    name = "diffutils_a-mktime",
+    srcs = [
+        "mktime.c",
+        "config.h",
+        "libc-config.h",
+        "stdckdint.h",
+        "intprops.h",
+        "intprops-internal.h",
+        "mktime-internal.h",
+    ],
+    includes = ["."]
+)
 
 cc_library(
     name = "diffutils",
-    srcs = BUILT_SOURCES + am__libdiffutils_a_SOURCES_DIST +
-    EXTRA_libdiffutils_a_SOURCES +
+    srcs = BUILT_SOURCES + libdiffutils_a_SOURCES +
+    # EXTRA_libdiffutils_a_SOURCES +
     [
         "config.h",
     ],
     deps = [
-        # ":diffutils-fopen"
+        ":diffutils_a-fopen",
+        ":diffutils_a-mbsrtoc32s-state",
+        ":diffutils_a-mbsrtowcs-state",
+        ":diffutils_a-mktime",
     ],
     hdrs = EXTRA_DIST + noinst_HEADERS,
     textual_hdrs = ["xstrtol.c"],
