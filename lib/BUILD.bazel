@@ -1,3 +1,13 @@
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+load("//:utils.bzl", "sed_command")
+load(
+    "//:config_linux.bzl",
+    LINUX_AUTOMAKE_VARS = "AUTOMAKE_VARIABLES",
+    LINUX_DELETE_VARS = "DELETE_VARIABLES",
+    LINUX_DIRECT_VARS = "DIRECT_VARIABLES",
+    LINUX_INLINE_VARS = "INLINE_VARIABLES",
+)
+
 # Follow the makefile naming conventions and ordering where possible.
 # Many variables have duplicate file listings which had to be removed
 # for input into Bazel rules.
@@ -193,6 +203,96 @@ libdiffutils_a_SOURCES = [
     "diagnose.c",
 ]
 
+# BUILT_SOURCES = $(ALLOCA_H) $(ASSERT_H) ctype.h dirent.h $(ERRNO_H) \
+# 	error.h fcntl.h $(FNMATCH_H) $(GETOPT_H) $(GETOPT_CDEFS_H) \
+# 	malloc/dynarray.gl.h malloc/dynarray-skeleton.gl.h inttypes.h \
+# 	langinfo.h $(LIMITS_H) locale.h pthread.h sched.h signal.h \
+# 	$(SIGSEGV_H) $(STDARG_H) $(STDBIT_H) $(STDCKDINT_H) \
+# 	$(STDDEF_H) $(STDINT_H) stdio.h stdlib.h string.h strings.h \
+# 	sys/random.h sys/stat.h sys/time.h sys/types.h sys/wait.h \
+# 	time.h uchar.h $(LIBUNISTRING_UNICASE_H) \
+# 	$(LIBUNISTRING_UNICTYPE_H) $(LIBUNISTRING_UNINORM_H) unistd.h \
+# 	$(LIBUNISTRING_UNISTR_H) $(LIBUNISTRING_UNITYPES_H) \
+# 	$(LIBUNISTRING_UNIWIDTH_H) wchar.h wctype.h
+
+BUILT_SOURCES = {
+    "alloca.h": "alloca.in.h",
+    # "assert.h": "assert.in.h",
+    "ctype.h": "ctype.in.h",
+    "dirent.h": "dirent.in.h",
+    # "errno.h": "errno.in.h",
+    "error.h": "error.in.h",
+    "fcntl.h": "fcntl.in.h",
+    # "fnmatch.h": "fnmatch.in.h"
+    # "getopt_h": "getopt.in.h",
+    "getopt-cdefs.h": "getopt-cdefs.in.h",
+}
+
+[
+    genrule(
+        name = hdr[:-len(".h")] + "_h",
+        srcs = [template] + select({
+            "@platforms//os:macos": [],
+            "//conditions:default": LINUX_INLINE_VARS.values(),
+        }),
+        outs = [hdr],
+        # cmd = select({
+        #     "@platforms//os:macos": sed_command(
+        #         automake_vars = MACOS_AUTOMAKE_VARS,
+        #         delete_vars = MACOS_DELETE_VARS,
+        #         direct_vars = MACOS_DIRECT_VARS,
+        #         inline_vars = MACOS_INLINE_VARS,
+        #         sed = "@sed",
+        #         template = template,
+        #         use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+        #     ),
+        #     "//conditions:default": sed_command(
+        #         automake_vars = LINUX_AUTOMAKE_VARS,
+        #         delete_vars = LINUX_DELETE_VARS,
+        #         direct_vars = LINUX_DIRECT_VARS,
+        #         inline_vars = LINUX_INLINE_VARS,
+        #         sed = "@sed",
+        #         template = template,
+        #         use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+        #     ),
+        # }),
+        cmd = sed_command(
+            automake_vars = LINUX_AUTOMAKE_VARS,
+            delete_vars = LINUX_DELETE_VARS,
+            direct_vars = LINUX_DIRECT_VARS,
+            inline_vars = LINUX_INLINE_VARS,
+            sed = "@sed",
+            template = template,
+            use_direct_vars = False,
+        ),
+        # cmd_bat = select({
+        #     "@platforms//os:macos": sed_command(
+        #         automake_vars = MACOS_AUTOMAKE_VARS,
+        #         delete_vars = MACOS_DELETE_VARS,
+        #         direct_vars = MACOS_DIRECT_VARS,
+        #         inline_vars = MACOS_INLINE_VARS,
+        #         is_windows = True,
+        #         sed = "@sed",
+        #         template = template,
+        #         use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+        #     ),
+        #     "//conditions:default": sed_command(
+        #         automake_vars = LINUX_AUTOMAKE_VARS,
+        #         delete_vars = LINUX_DELETE_VARS,
+        #         direct_vars = LINUX_DIRECT_VARS,
+        #         inline_vars = LINUX_INLINE_VARS,
+        #         is_windows = True,
+        #         sed = "@sed",
+        #         template = template,
+        #         use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+        #     ),
+        # }),
+        tools = ["@sed"],
+    )
+    for hdr, template in BUILT_SOURCES.items()
+]
+
+
 cc_library(
     name = "diffutils",
     # srcs = BUILT_SOURCES + libdiffutils_a_SOURCES +
@@ -253,4 +353,14 @@ cc_library(
         "mktime-internal.h",
     ],
     includes = ["."]
+)
+
+copy_file(
+    name = "config_h",
+    src = select({
+        "@platforms//os:macos": "config_macos.h",
+        "//conditions:default": "config_linux.h",
+    }),
+    out = "config.h",
+    # tags = ["manual"],
 )
