@@ -228,7 +228,8 @@ BUILT_SOURCES = {
     # "getopt-cdefs.h": "getopt-cdefs.in.h"
 
     "malloc/dynarray.gl.h": "malloc/dynarray.h",
-    "malloc/dynarray-skeleton.gl.h": "malloc/dynarray-skeleton.c"
+    "malloc/dynarray-skeleton.gl.h": "malloc/dynarray-skeleton.c",
+    "inttypes.h": "inttypes.in.h"
 }
 
 [
