@@ -230,6 +230,8 @@ BUILT_SOURCES = {
     "malloc/dynarray-skeleton.gl.h": "malloc/dynarray-skeleton.c",
     "inttypes.h": "inttypes.in.h",
     "langinfo.h": "langinfo.in.h",
+    "limits.h": "limits.in.h",
+
 }
 
 [
