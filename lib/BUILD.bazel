@@ -231,6 +231,7 @@ BUILT_SOURCES = {
     "inttypes.h": "inttypes.in.h",
     "langinfo.h": "langinfo.in.h",
     "limits.h": "limits.in.h",
+    "locale.h": "locale.in.h",
 
 }
 
@@ -303,7 +304,8 @@ cc_library(
     name = "diffutils",
     # srcs = BUILT_SOURCES + libdiffutils_a_SOURCES +
     srcs = libdiffutils_a_SOURCES +
-    glob(["**/*.h"]),
+    glob(["**/*.h"], ["**/*.in.h"]) +
+    BUILT_SOURCES.keys(),
     deps = [
         ":diffutils_a-fopen",
         ":diffutils_a-mbsrtoc32s-state",

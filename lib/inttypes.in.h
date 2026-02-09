@@ -1031,4 +1031,3 @@ _GL_WARN_ON_USE (strtoumax, "strtoumax is unportable - "
 #endif
 
 #endif /* !defined INTTYPES_H && !defined _GL_JUST_INCLUDE_SYSTEM_INTTYPES_H */
-G
