@@ -227,7 +227,8 @@ BUILT_SOURCES = {
     # "getopt.h": "getopt.in.h"
     # "getopt-cdefs.h": "getopt-cdefs.in.h"
 
-    "malloc/dynarray.gl.h": "malloc/dynarray.h"
+    "malloc/dynarray.gl.h": "malloc/dynarray.h",
+    "malloc/dynarray-skeleton.gl.h": "malloc/dynarray-skeleton.c"
 }
 
 [
