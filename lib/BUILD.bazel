@@ -222,14 +222,7 @@ BUILT_SOURCES = {
     "dirent.h": "dirent.in.h",
     # "errno.h": "errno.in.h",
     "error.h": "error.in.h",
-
-    # TODO: broken
-    # Note: there are differences with bison, generation is broken
-    # "fcntl.h": "fcntl.in.h",
-
-    # "fnmatch.h": "fnmatch.in.h"
-    # "getopt_h": "getopt.in.h",
-    # "getopt-cdefs.h": "getopt-cdefs.in.h",
+    "fcntl.h": "fcntl.in.h",
 }
 
 [

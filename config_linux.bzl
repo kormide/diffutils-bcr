@@ -299,7 +299,7 @@ AUTOMAKE_VARIABLES = {
     "@''GNULIB_OBSTACK_PRINTF''@": "1",
     "@''GNULIB_OBSTACK_PRINTF_POSIX''@": "0",
     "@''GNULIB_OPEN''@": "1",
-    "@''GNULIB_OPENAT''@": "0",
+    "@''GNULIB_OPENAT''@": "1",
     "@''GNULIB_OPENDIR''@": "1",
     "@''GNULIB_OVERRIDES_STRUCT_STAT''@": "0",
     "@''GNULIB_PCLOSE''@": "0",
