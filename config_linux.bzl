@@ -1240,5 +1240,5 @@ INLINE_VARIABLES = {
 }
 
 DELETE_VARIABLES = [
-    "libc_hidden_proto",
+    # "libc_hidden_proto",
 ]

@@ -223,6 +223,11 @@ BUILT_SOURCES = {
     # "errno.h": "errno.in.h",
     "error.h": "error.in.h",
     "fcntl.h": "fcntl.in.h",
+    # "fnmatch.h": "fnmatch.in.h"
+    # "getopt.h": "getopt.in.h"
+    # "getopt-cdefs.h": "getopt-cdefs.in.h"
+
+    "malloc/dynarray.gl.h": "malloc/dynarray.h"
 }
 
 [
