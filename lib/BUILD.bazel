@@ -240,6 +240,7 @@ BUILT_SOURCES = {
     # "stdbit.h": "stdbit.in.h"
     "stdckdint.h": "stdckdint.in.h",
     "stddef.h" : "stddef.in.h",
+    # "stdint.h" : "stdint.in.h",
 
 }
 
