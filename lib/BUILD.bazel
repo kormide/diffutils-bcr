@@ -236,6 +236,9 @@ BUILT_SOURCES = {
     "sched.h": "sched.in.h",
     "signal.h": "signal.in.h",
     "sigsegv.h": "sigsegv.in.h",
+    # "stdarg.h": "stdarg.in.h"
+    # "stdbit.h": "stdbit.in.h"
+    "stdckdint.h": "stdckdint.in.h",
 
 }
 
