@@ -234,6 +234,7 @@ BUILT_SOURCES = {
     "locale.h": "locale.in.h",
     "pthread.h": "pthread.in.h",
     "sched.h": "sched.in.h",
+    "signal.h": "signal.in.h",
 
 }
 
