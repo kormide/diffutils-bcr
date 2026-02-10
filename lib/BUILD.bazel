@@ -242,6 +242,7 @@ BUILT_SOURCES = {
     "stddef.h" : "stddef.in.h",
     # "stdint.h" : "stdint.in.h",
     "stdio.h": "stdio.in.h",
+    "stdlib.h": "stdlib.in.h",
 }
 
 [
