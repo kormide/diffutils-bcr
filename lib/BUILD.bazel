@@ -235,6 +235,7 @@ BUILT_SOURCES = {
     "pthread.h": "pthread.in.h",
     "sched.h": "sched.in.h",
     "signal.h": "signal.in.h",
+    "sigsegv.h": "sigsegv.in.h",
 
 }
 
