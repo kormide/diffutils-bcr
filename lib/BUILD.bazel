@@ -233,6 +233,7 @@ BUILT_SOURCES = {
     "limits.h": "limits.in.h",
     "locale.h": "locale.in.h",
     "pthread.h": "pthread.in.h",
+    "sched.h": "sched.in.h",
 
 }
 

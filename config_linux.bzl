@@ -384,7 +384,7 @@ AUTOMAKE_VARIABLES = {
     "@''GNULIB_RPMATCH''@": "0",
     "@''GNULIB_SCANDIR''@": "0",
     "@''GNULIB_SCANF''@": "1",
-    "@''GNULIB_SCHED_YIELD''@": "0",
+    "@''GNULIB_SCHED_YIELD''@": "IN_DIFFUTILS_GNULIB_TESTS",
     "@''GNULIB_SECURE_GETENV''@": "0",
     "@''GNULIB_SETENV''@": "0",
     "@''GNULIB_SETHOSTNAME''@": "0",
