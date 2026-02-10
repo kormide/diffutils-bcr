@@ -232,6 +232,7 @@ BUILT_SOURCES = {
     "langinfo.h": "langinfo.in.h",
     "limits.h": "limits.in.h",
     "locale.h": "locale.in.h",
+    "pthread.h": "pthread.in.h",
 
 }
 
