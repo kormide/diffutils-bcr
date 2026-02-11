@@ -252,6 +252,7 @@ BUILT_SOURCES = {
     "sys/wait.h": "sys_wait.in.h",
     "time.h": "time.in.h",
     "uchar.h" : "uchar.in.h",
+    "unicase.h": "unicase.in.h"
 }
 
 [
