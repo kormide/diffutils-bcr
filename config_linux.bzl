@@ -509,7 +509,7 @@ AUTOMAKE_VARIABLES = {
     "@''GNULIB_VSPRINTF_POSIX''@": "0",
     "@''GNULIB_VSZPRINTF''@": "0",
     "@''GNULIB_VZPRINTF''@": "0",
-    "@''GNULIB_WAITPID''@": "1",
+    "@''GNULIB_WAITPID''@": "0",
     "@''GNULIB_WCPCPY''@": "0",
     "@''GNULIB_WCPNCPY''@": "0",
     "@''GNULIB_WCRTOMB''@": "0",
