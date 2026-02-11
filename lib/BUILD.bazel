@@ -248,6 +248,7 @@ BUILT_SOURCES = {
     "sys/random.h": "sys_random.in.h",
     "sys/stat.h": "sys_stat.in.h",
     "sys/time.h": "sys_time.in.h",
+    "sys/types.h": "sys_types.in.h",
 }
 
 [
