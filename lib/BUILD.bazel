@@ -250,6 +250,7 @@ BUILT_SOURCES = {
     "sys/time.h": "sys_time.in.h",
     "sys/types.h": "sys_types.in.h",
     "sys/wait.h": "sys_wait.in.h",
+    "time.h": "time.in.h",
 }
 
 [
