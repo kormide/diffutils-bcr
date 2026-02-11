@@ -8,74 +8,17 @@ load(
     LINUX_INLINE_VARS = "INLINE_VARIABLES",
 )
 
-# Follow the makefile naming conventions and ordering where possible.
-# Many variables have duplicate file listings which had to be removed
-# for input into Bazel rules.
-
-BUILT_SOURCES = [
-    "alloca.h",
-    # "assert.h",
-    "ctype.h",
-    "dirent.h",
-    # "errno.h",
-    "error.h",
-    "fcntl.h",
-    # "fnmatch.h",
-    # "getopt.h",
-    # "getopt_cdefs.h",
-    "malloc/dynarray.gl.h",
-    "malloc/dynarray-skeleton.gl.h",
-    "inttypes.h",
-    "langinfo.h",
-    "limits.h",
-    "locale.h",
-    "pthread.h",
-    "sched.h",
-    "signal.h",
-    "sigsegv.h",
-    # "stdarg.h",
-    # "stdbit.h",
-    "stdckdint.h",
-    "stddef.h",
-    # "stdint.h",
-    "stdio.h",
-    "stdlib.h",
-    "string.h",
-    "strings.h",
-    "sys/random.h",
-    "sys/stat.h",
-    "sys/time.h",
-    "sys/types.h",
-    "sys/wait.h",
-    "time.h",
-    "uchar.h",
-    "unicase.h",
-    "unictype.h",
-    "uninorm.h",
-    "unistd.h",
-    "unistr.h",
-    "unitypes.h",
-    "uniwidth.h",
-    "wchar.h",
-    "wctype.h",
-]
-
-libdiffutils_a_SOURCES = [
+SOURCES = [
     "allocator.c",
     "argmatch.c",
-    # "openat-priv.h",
     "openat-proc.c",
     "basename-lgpl.c",
-    # "binary-io.h",
     "binary-io.c",
-    # "bitrotate.h",
     "bitrotate.c",
     "btoc32.c",
     "btowc.c",
-    # "c-ctype.h",
     "c-ctype.c",
     "c-file-type.c",
-    # "c-stack.h",
     "c-stack.c",
     "c-strcasecmp.c",
     "c32_apply_type_test.c",
@@ -97,7 +40,6 @@ libdiffutils_a_SOURCES = [
     "careadlinkat.c",
     "chdir-long.c",
     "cloexec.c",
-    # "diffseq.h",
     "dirname.c",
     "basename.c",
     "dirname-lgpl.c",
@@ -109,7 +51,6 @@ libdiffutils_a_SOURCES = [
     "filenamecat.c",
     "filenamecat-lgpl.c",
     "getprogname.c",
-    # "gettext.h",
     "gettime.c",
     "malloc/dynarray_at_failure.c",
     "malloc/dynarray_emplace_enlarge.c",
@@ -119,9 +60,7 @@ libdiffutils_a_SOURCES = [
     "hard-locale.c",
     "hash.c",
     "ialloc.c",
-    # "idx.h",
     "localcharset.c",
-    # "glthread/lock.h",
     "glthread/lock.c",
     "malloca.c",
     "mbrtoc32.c",
@@ -131,26 +70,19 @@ libdiffutils_a_SOURCES = [
     "mbsrtowcs.c",
     "mbszero.c",
     "mcel.c",
-    # "mcel.h",
-    # "minmax.h",
     "nl_langinfo.c",
     "nstrftime.c",
-    # "glthread/once.h",
     "glthread/once.c",
     "openat-die.c",
-    # "progname.h",
     "progname.c",
     "propername-lite.c",
-    # "propername.h",
     "quotearg.c",
     "realloc.c",
     "reallocarray.c",
-    # "same-inode.h",
     "same-inode.c",
     "save-cwd.c",
     "setlocale_null.c",
     "setlocale_null-unlocked.c",
-    # "sh-quote.h",
     "sh-quote.c",
     "sig-handler.c",
     "sigsegv.c",
@@ -158,9 +90,7 @@ libdiffutils_a_SOURCES = [
     "stat-time.c",
     "stdlib.c",
     "stdopen.c",
-    # "strnlen1.h",
     "strnlen1.c",
-    # "system-quote.h",
     "system-quote.c",
     "tempname.c",
     "glthread/threadlib.c",
@@ -186,14 +116,12 @@ libdiffutils_a_SOURCES = [
     "unistr/u32-strcat.c",
     "unistr/u32-strlen.c",
     "uniwidth/width.c",
-    # "version-etc.h",
     "version-etc.c",
     "version-etc-fsf.c",
     "wctype-h.c",
     "xmalloc.c",
     "xalloc-die.c",
     "xfreopen.c",
-    # "xfreopen.h",
     "xmalloca.c",
     "xstdopen.c",
     "xstrtoimax.c",
@@ -202,18 +130,6 @@ libdiffutils_a_SOURCES = [
     "cmpbuf.c",
     "diagnose.c",
 ]
-
-# BUILT_SOURCES = $(ALLOCA_H) $(ASSERT_H) ctype.h dirent.h $(ERRNO_H) \
-# 	error.h fcntl.h $(FNMATCH_H) $(GETOPT_H) $(GETOPT_CDEFS_H) \
-# 	malloc/dynarray.gl.h malloc/dynarray-skeleton.gl.h inttypes.h \
-# 	langinfo.h $(LIMITS_H) locale.h pthread.h sched.h signal.h \
-# 	$(SIGSEGV_H) $(STDARG_H) $(STDBIT_H) $(STDCKDINT_H) \
-# 	$(STDDEF_H) $(STDINT_H) stdio.h stdlib.h string.h strings.h \
-# 	sys/random.h sys/stat.h sys/time.h sys/types.h sys/wait.h \
-# 	time.h uchar.h $(LIBUNISTRING_UNICASE_H) \
-# 	$(LIBUNISTRING_UNICTYPE_H) $(LIBUNISTRING_UNINORM_H) unistd.h \
-# 	$(LIBUNISTRING_UNISTR_H) $(LIBUNISTRING_UNITYPES_H) \
-# 	$(LIBUNISTRING_UNIWIDTH_H) wchar.h wctype.h
 
 BUILT_SOURCES = {
     "alloca.h": "alloca.in.h",
@@ -330,8 +246,7 @@ BUILT_SOURCES = {
 
 cc_library(
     name = "diffutils",
-    # srcs = BUILT_SOURCES + libdiffutils_a_SOURCES +
-    srcs = libdiffutils_a_SOURCES +
+    srcs = SOURCES +
     glob(["**/*.h"], ["**/*.in.h"]) +
     BUILT_SOURCES.keys(),
     deps = [
@@ -352,9 +267,6 @@ cc_library(
         "config.h",
         "stdio.h",
         "fcntl.h",
-        # "unistd.h",
-        # "sys/types.h",
-        # "sys/stat.h",
     ],
     includes = ["."]
 )
@@ -398,5 +310,4 @@ copy_file(
         "//conditions:default": "config_linux.h",
     }),
     out = "config.h",
-    # tags = ["manual"],
 )
