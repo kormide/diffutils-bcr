@@ -254,6 +254,7 @@ BUILT_SOURCES = {
     "uchar.h" : "uchar.in.h",
     "unicase.h": "unicase.in.h",
     "unictype.h": "unictype.in.h",
+    "uninorm.h": "uninorm.in.h",
 }
 
 [
