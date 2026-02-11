@@ -1666,6 +1666,11 @@ AUTOMAKE_VARIABLES = {
     "@''REPLACE_WCSNCMP''@": "0",
     "@''REPLACE_WCSSTR''@": "0",
     "@''GNULIB_WGETCWD''@": "0",
+
+    "@''GNULIB_ISWPUNCT''@": "1",
+    "@''REPLACE_ISWPUNCT''@": "0",
+    "@''REPLACE_WCTYPE''@": "0",
+    "@''REPLACE_WCTRANS''@": "0",
 }
 
 DIRECT_VARIABLES = {

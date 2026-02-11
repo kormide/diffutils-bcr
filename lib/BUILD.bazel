@@ -260,6 +260,7 @@ BUILT_SOURCES = {
     "unitypes.h": "unitypes.in.h",
     "uniwidth.h": "uniwidth.in.h",
     "wchar.h": "wchar.in.h",
+    "wctype.h": "wctype.in.h",
 }
 
 [
