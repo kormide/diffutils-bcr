@@ -243,6 +243,7 @@ BUILT_SOURCES = {
     # "stdint.h" : "stdint.in.h",
     "stdio.h": "stdio.in.h",
     "stdlib.h": "stdlib.in.h",
+    "string.h": "string.in.h",
 }
 
 [
