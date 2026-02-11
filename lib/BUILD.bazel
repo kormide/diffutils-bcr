@@ -257,6 +257,7 @@ BUILT_SOURCES = {
     "uninorm.h": "uninorm.in.h",
     "unistd.h": "unistd.in.h",
     "unistr.h": "unistr.in.h",
+    "unitypes.h": "unitypes.in.h",
 }
 
 [
