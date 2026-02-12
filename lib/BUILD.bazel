@@ -9,6 +9,15 @@ load(
     LINUX_INLINE_VARS = "INLINE_VARIABLES",
 )
 
+load(
+    "//:config_macos.bzl",
+    MACOS_GENERATED_HEADERS = "GENERATED_HEADERS",
+    MACOS_AUTOMAKE_VARS = "AUTOMAKE_VARIABLES",
+    MACOS_DELETE_VARS = "DELETE_VARIABLES",
+    MACOS_DIRECT_VARS = "DIRECT_VARIABLES",
+    MACOS_INLINE_VARS = "INLINE_VARIABLES",
+)
+
 SOURCES = [
     "allocator.c",
     "argmatch.c",
@@ -240,35 +249,29 @@ GENERATED_HEADERS = {
             "//conditions:default": LINUX_INLINE_VARS.values(),
         }),
         outs = [hdr],
-        # cmd = select({
-        #     "@platforms//os:macos": sed_command(
-        #         automake_vars = MACOS_AUTOMAKE_VARS,
-        #         delete_vars = MACOS_DELETE_VARS,
-        #         direct_vars = MACOS_DIRECT_VARS,
-        #         inline_vars = MACOS_INLINE_VARS,
-        #         sed = "@sed",
-        #         template = template,
-        #         use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
-        #     ),
-        #     "//conditions:default": sed_command(
-        #         automake_vars = LINUX_AUTOMAKE_VARS,
-        #         delete_vars = LINUX_DELETE_VARS,
-        #         direct_vars = LINUX_DIRECT_VARS,
-        #         inline_vars = LINUX_INLINE_VARS,
-        #         sed = "@sed",
-        #         template = template,
-        #         use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
-        #     ),
-        # }),
-        cmd = sed_command(
-            automake_vars = LINUX_AUTOMAKE_VARS,
-            delete_vars = LINUX_DELETE_VARS,
-            direct_vars = LINUX_DIRECT_VARS,
-            inline_vars = LINUX_INLINE_VARS,
-            sed = "@sed",
-            template = template,
-            use_direct_vars = False,
-        ),
+        cmd = select({
+            "@platforms//os:macos": sed_command(
+                automake_vars = MACOS_AUTOMAKE_VARS,
+                delete_vars = MACOS_DELETE_VARS,
+                direct_vars = MACOS_DIRECT_VARS,
+                inline_vars = MACOS_INLINE_VARS,
+                sed = "@sed",
+                template = template,
+                use_direct_vars = False
+                # use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+            ),
+            "//conditions:default": sed_command(
+                automake_vars = LINUX_AUTOMAKE_VARS,
+                delete_vars = LINUX_DELETE_VARS,
+                direct_vars = LINUX_DIRECT_VARS,
+                inline_vars = LINUX_INLINE_VARS,
+                sed = "@sed",
+                template = template,
+                use_direct_vars = False
+                # use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+            ),
+        }),
+        
         # cmd_bat = select({
         #     "@platforms//os:macos": sed_command(
         #         automake_vars = MACOS_AUTOMAKE_VARS,
