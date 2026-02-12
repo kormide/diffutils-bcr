@@ -1258,7 +1258,7 @@ AUTOMAKE_VARIABLES = {
     "@''HAVE_WMEMMOVE''@": "1",
     "@''HAVE_WMEMPCPY''@": "1",
     "@''HAVE_WMEMSET''@": "1",
-    "@''HAVE_XLOCALE_H''@": "0",
+    "@''HAVE_XLOCALE_H''@": "1",
     "@''HAVE__BOOL''@": "1",
     "@''HAVE__EXIT''@": "1",
     "@''ICONV_CONST''@": "",
