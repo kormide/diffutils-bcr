@@ -1047,7 +1047,7 @@ AUTOMAKE_VARIABLES = {
     "@''HAVE_NANOSLEEP''@": "1",
     "@''HAVE_NEWLOCALE''@": "1",
     "@''HAVE_NL_LANGINFO''@": "1",
-    "@''HAVE_OFF64_T''@": "1",
+    "@''HAVE_OFF64_T''@": "0",
     "@''HAVE_OPENAT''@": "1",
     "@''HAVE_OPENDIR''@": "1",
     "@''HAVE_OS_H''@": "0",
