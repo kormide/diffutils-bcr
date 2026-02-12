@@ -7,6 +7,7 @@ load(
     LINUX_DELETE_VARS = "DELETE_VARIABLES",
     LINUX_DIRECT_VARS = "DIRECT_VARIABLES",
     LINUX_INLINE_VARS = "INLINE_VARIABLES",
+    LINUX_DELETE_BETWEEN_PATTERNS = "DELETE_BETWEEN_PATTERNS",
 )
 
 load(
@@ -16,6 +17,7 @@ load(
     MACOS_DELETE_VARS = "DELETE_VARIABLES",
     MACOS_DIRECT_VARS = "DIRECT_VARIABLES",
     MACOS_INLINE_VARS = "INLINE_VARIABLES",
+    MACOS_DELETE_BETWEEN_PATTERNS = "DELETE_BETWEEN_PATTERNS",
 )
 
 SOURCES = [
@@ -143,13 +145,13 @@ SOURCES = [
 
 GENERATED_HEADERS = {
     "alloca.h": "alloca.in.h",
-    # "assert.h": "assert.in.h",
+    "assert.h": "assert.in.h",
     "ctype.h": "ctype.in.h",
     "dirent.h": "dirent.in.h",
     # "errno.h": "errno.in.h",
     "error.h": "error.in.h",
     "fcntl.h": "fcntl.in.h",
-    # "fnmatch.h": "fnmatch.in.h"
+    "fnmatch.h": "fnmatch.in.h",
     # "getopt.h": "getopt.in.h"
     # "getopt-cdefs.h": "getopt-cdefs.in.h"
     "malloc/dynarray.gl.h": "malloc/dynarray.h",
@@ -241,35 +243,44 @@ GENERATED_HEADERS = {
 #     "//conditions:default": []
 # })
 
+print(MACOS_DELETE_BETWEEN_PATTERNS)
+
+USES_DIRECT_REPLACEMENTS = [
+    "assert.h",
+]
+
 [
     genrule(
         name = hdr[:-len(".h")] + "_h",
         srcs = [template] + select({
-            "@platforms//os:macos": [],
+            "@platforms//os:macos": MACOS_INLINE_VARS.values(),
             "//conditions:default": LINUX_INLINE_VARS.values(),
         }),
         outs = [hdr],
         cmd = select({
-            "@platforms//os:macos": sed_command(
+            "@platforms//os:osx": sed_command(
                 automake_vars = MACOS_AUTOMAKE_VARS,
                 delete_vars = MACOS_DELETE_VARS,
                 direct_vars = MACOS_DIRECT_VARS,
                 inline_vars = MACOS_INLINE_VARS,
                 sed = "@sed",
                 template = template,
-                use_direct_vars = False
-                # use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+                delete_between = MACOS_DELETE_BETWEEN_PATTERNS,
+                # use_direct_vars = False
+                use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
             ),
-            "//conditions:default": sed_command(
-                automake_vars = LINUX_AUTOMAKE_VARS,
-                delete_vars = LINUX_DELETE_VARS,
-                direct_vars = LINUX_DIRECT_VARS,
-                inline_vars = LINUX_INLINE_VARS,
-                sed = "@sed",
-                template = template,
-                use_direct_vars = False
-                # use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
-            ),
+            "//conditions:default": "",
+            # "//conditions:default": sed_command(
+            #     automake_vars = LINUX_AUTOMAKE_VARS,
+            #     delete_vars = LINUX_DELETE_VARS,
+            #     direct_vars = LINUX_DIRECT_VARS,
+            #     inline_vars = LINUX_INLINE_VARS,
+            #     sed = "@sed",
+            #     template = template,
+            #     delete_between = LINUX_DELETE_BETWEEN_PATTERNS,
+            #     use_direct_vars = False
+            #     # use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+            # ),
         }),
         
         # cmd_bat = select({
@@ -306,8 +317,8 @@ cc_library(
     srcs = SOURCES +
     glob(["**/*.h"], ["**/*.in.h"]) +
     select({
-        "@platforms//os:linux": LINUX_GENERATED_HEADERS,
-        "//conditions:default": []
+        "@platforms//os:macos": MACOS_GENERATED_HEADERS,
+        "//conditions:default": LINUX_GENERATED_HEADERS
     }),
     deps = [
         ":diffutils_a-fopen",

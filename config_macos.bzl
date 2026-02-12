@@ -64,6 +64,7 @@ AUTOMAKE_VARIABLES = {
     "@''ENOLINK_VALUE''@": "",
     "@''EOVERFLOW_HIDDEN''@": "",
     "@''EOVERFLOW_VALUE''@": "",
+    "@''GL_GENERATE_ASSERT_H_TRUE''@": "",
     "@''GNULIBHEADERS_OVERRIDE_CHAR16_T''@": "0",
     "@''GNULIBHEADERS_OVERRIDE_CHAR32_T''@": "0",
     "@''GNULIBHEADERS_OVERRIDE_CHAR8_T''@": "0",
@@ -181,6 +182,7 @@ AUTOMAKE_VARIABLES = {
     "@''GNULIB_FMOD''@": "0",
     "@''GNULIB_FMODF''@": "0",
     "@''GNULIB_FMODL''@": "0",
+    "@''GNULIB_FNMATCH''@": "1",
     "@''GNULIB_FOPEN''@": "1",
     "@''GNULIB_FOPEN_GNU''@": "1",
     "@''GNULIB_FPRINTF''@": "1",
@@ -931,6 +933,8 @@ AUTOMAKE_VARIABLES = {
     "@''HAVE_FMAL''@": "1",
     "@''HAVE_FMODF''@": "1",
     "@''HAVE_FMODL''@": "1",
+    "@''HAVE_FNMATCH''@": "1",
+    "@''HAVE_FNMATCH_H''@": "1",
     "@''HAVE_FREELOCALE''@": "1",
     "@''HAVE_FREXPF''@": "1",
     "@''HAVE_FSTATAT''@": "1",
@@ -1271,6 +1275,7 @@ AUTOMAKE_VARIABLES = {
     "@''NEXT_ERROR_H''@": "<error.h>",
     "@''NEXT_FCNTL_H''@": "<fcntl.h>",
     "@''NEXT_FLOAT_H''@": "",
+    "@''NEXT_FNMATCH_H''@": "<fnmatch.h>",
     "@''NEXT_GETOPT_H''@": "<getopt.h>",
     "@''NEXT_ICONV_H''@": "<iconv.h>",
     "@''NEXT_INTTYPES_H''@": "<inttypes.h>",
@@ -1377,6 +1382,7 @@ AUTOMAKE_VARIABLES = {
     "@''REPLACE_FMOD''@": "0",
     "@''REPLACE_FMODF''@": "0",
     "@''REPLACE_FMODL''@": "0",
+    "@''REPLACE_FNMATCH''@": "1",
     "@''REPLACE_FOPEN''@": "1",
     "@''REPLACE_FOPEN_FOR_FOPEN_GNU''@": "1",
     "@''REPLACE_FPRINTF''@": "0",
@@ -1721,6 +1727,9 @@ DIRECT_VARIABLES = {
     "__always_inline": "inline _GL_ATTRIBUTE_ALWAYS_INLINE",
     "__glibc_likely": "_GL_LIKELY",
     "__glibc_unlikely": "_GL_UNLIKELY",
+    # "_gl_verify": "_gl_static_assert",
+    # "_GL_VERIFY": "_GL_STATIC_ASSERT",
+    # "_GL_STATIC_ASSERT_H": "_GL_STATIC_ASSERT_H",
 }
 
 INLINE_VARIABLES = {
@@ -1728,8 +1737,17 @@ INLINE_VARIABLES = {
     "definition of _GL_WARN_ON_USE": "warn-on-use.h",
     "definition of _Noreturn": "_Noreturn.h",
     "definitions of _GL_FUNCDECL_RPL": "c++defs.h",
+    "definition of static_assert": "verify.h",
 }
 
 DELETE_VARIABLES = [
+    # "assert\\.h omit start.*assert\\.h omit end"
     # "libc_hidden_proto",
+]
+
+DELETE_BETWEEN_PATTERNS = [
+    [
+        "assert.h",
+        "start",
+    ]
 ]

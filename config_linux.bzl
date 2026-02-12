@@ -1726,3 +1726,5 @@ INLINE_VARIABLES = {
 DELETE_VARIABLES = [
     # "libc_hidden_proto",
 ]
+
+DELETE_BETWEEN_PATTERNS = []
