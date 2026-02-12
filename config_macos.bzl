@@ -1185,7 +1185,7 @@ AUTOMAKE_VARIABLES = {
     "@''HAVE_SYMLINK''@": "1",
     "@''HAVE_SYMLINKAT''@": "1",
     "@''HAVE_SYS_BITYPES_H''@": "0",
-    "@''HAVE_SYS_CDEFS_H''@": "1",
+    "@''HAVE_SYS_CDEFS_H''@": "0",
     "@''HAVE_SYS_INTTYPES_H''@": "0",
     "@''HAVE_SYS_IOCTL_H''@": "1",
     "@''HAVE_SYS_LOADAVG_H''@": "0",
