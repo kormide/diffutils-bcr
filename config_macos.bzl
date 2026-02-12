@@ -52,7 +52,7 @@ AUTOMAKE_VARIABLES = {
     "@''BITSIZEOF_PTRDIFF_T''@": "",
     "@''BITSIZEOF_SIG_ATOMIC_T''@": "",
     "@''BITSIZEOF_SIZE_T''@": "",
-    "@''BITSIZEOF_WCHAR_T''@": "",
+    "@''BITSIZEOF_WCHAR_T''@": "32",
     "@''BITSIZEOF_WINT_T''@": "",
     "@''CAN_PRINT_STACK_TRACE''@": "0",
     "@''CXX_HAS_CHAR8_TYPE''@": "0",
