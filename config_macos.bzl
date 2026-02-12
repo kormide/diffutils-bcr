@@ -964,7 +964,7 @@ AUTOMAKE_VARIABLES = {
     "@''HAVE_GETPAGESIZE''@": "1",
     "@''HAVE_GETPASS''@": "1",
     "@''HAVE_GETPROGNAME''@": "1",
-    "@''HAVE_GETRANDOM''@": "1",
+    "@''HAVE_GETRANDOM''@": "0",
     "@''HAVE_GETRUSAGE''@": "1",
     "@''HAVE_GETSUBOPT''@": "1",
     "@''HAVE_GETTIMEOFDAY''@": "1",
