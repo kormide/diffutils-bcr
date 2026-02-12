@@ -984,7 +984,7 @@ AUTOMAKE_VARIABLES = {
     "@''HAVE_ISWCNTRL''@": "1",
     "@''HAVE_ISXDIGIT_L''@": "1",
     "@''HAVE_LANGINFO_ABALTMON''@": "0",
-    "@''HAVE_LANGINFO_ALTMON''@": "1",
+    "@''HAVE_LANGINFO_ALTMON''@": "0",
     "@''HAVE_LANGINFO_CODESET''@": "1",
     "@''HAVE_LANGINFO_ERA''@": "1",
     "@''HAVE_LANGINFO_H''@": "1",
