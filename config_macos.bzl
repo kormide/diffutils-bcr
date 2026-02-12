@@ -1141,7 +1141,7 @@ AUTOMAKE_VARIABLES = {
     "@''HAVE_SIGABBREV_NP''@": "1",
     "@''HAVE_SIGACTION''@": "1",
     "@''HAVE_SIGDESCR_NP''@": "1",
-    "@''HAVE_SIGHANDLER_T''@": "1",
+    "@''HAVE_SIGHANDLER_T''@": "0",
     "@''HAVE_SIGINFO_T''@": "1",
     "@''HAVE_SIGNED_SIG_ATOMIC_T''@": "",
     "@''HAVE_SIGNED_WCHAR_T''@": "",
