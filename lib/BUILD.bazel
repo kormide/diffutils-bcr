@@ -247,6 +247,7 @@ print(MACOS_DELETE_BETWEEN_PATTERNS)
 
 USES_DIRECT_REPLACEMENTS = [
     "assert.h",
+    "malloc/dynarray-skeleton.gl.h"
 ]
 
 [
