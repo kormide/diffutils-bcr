@@ -1320,7 +1320,7 @@ AUTOMAKE_VARIABLES = {
     "@''NEXT_UNISTD_H''@": "<unistd.h>",
     "@''NEXT_WCHAR_H''@": "<wchar.h>",
     "@''NEXT_WCTYPE_H''@": "<wctype.h>",
-    "@''NULLPTR_T_NEEDS_STDDEF''@": "0",
+    "@''NULLPTR_T_NEEDS_STDDEF''@": "1",
     "@''PRAGMA_COLUMNS''@": "",
     "@''PRAGMA_SYSTEM_HEADER''@": "#pragma GCC system_header",
     "@''PRIPTR_PREFIX''@": "\"l\"",
