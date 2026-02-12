@@ -1742,7 +1742,7 @@ INLINE_VARIABLES = {
 
 DELETE_VARIABLES = [
     # "assert\\.h omit start.*assert\\.h omit end"
-    # "libc_hidden_proto",
+    "libc_hidden_proto",
 ]
 
 DELETE_BETWEEN_PATTERNS = [
