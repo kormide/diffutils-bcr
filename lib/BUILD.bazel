@@ -167,11 +167,11 @@ GENERATED_HEADERS = {
     "sched.h": "sched.in.h",
     "signal.h": "signal.in.h",
     "sigsegv.h": "sigsegv.in.h",
-    # "stdarg.h": "stdarg.in.h"
-    # "stdbit.h": "stdbit.in.h"
+    "stdarg.h": "stdarg.in.h",
+    "stdbit.h": "stdbit.in.h",
     "stdckdint.h": "stdckdint.in.h",
     "stddef.h" : "stddef.in.h",
-    # "stdint.h" : "stdint.in.h",
+    "stdint.h" : "stdint.in.h",
     "stdio.h": "stdio.in.h",
     "stdlib.h": "stdlib.in.h",
     "string.h": "string.in.h",
