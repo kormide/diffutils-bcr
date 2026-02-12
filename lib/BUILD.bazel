@@ -153,7 +153,7 @@ GENERATED_HEADERS = {
     "fcntl.h": "fcntl.in.h",
     "fnmatch.h": "fnmatch.in.h",
     "getopt.h": "getopt.in.h",
-    # "getopt-cdefs.h": "getopt-cdefs.in.h"
+    "getopt-cdefs.h": "getopt-cdefs.in.h",
     "malloc/dynarray.gl.h": "malloc/dynarray.h",
     "malloc/dynarray-skeleton.gl.h": "malloc/dynarray-skeleton.c",
     "inttypes.h": "inttypes.in.h",
