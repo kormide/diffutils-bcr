@@ -2,6 +2,7 @@ load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
 load("//:utils.bzl", "sed_command")
 load(
     "//:config_linux.bzl",
+    LINUX_GENERATED_HEADERS = "GENERATED_HEADERS",
     LINUX_AUTOMAKE_VARS = "AUTOMAKE_VARIABLES",
     LINUX_DELETE_VARS = "DELETE_VARIABLES",
     LINUX_DIRECT_VARS = "DIRECT_VARIABLES",
@@ -131,7 +132,7 @@ SOURCES = [
     "diagnose.c",
 ]
 
-BUILT_SOURCES = {
+GENERATED_HEADERS = {
     "alloca.h": "alloca.in.h",
     # "assert.h": "assert.in.h",
     "ctype.h": "ctype.in.h",
@@ -178,6 +179,58 @@ BUILT_SOURCES = {
     "wchar.h": "wchar.in.h",
     "wctype.h": "wctype.in.h",
 }
+
+# BUILD_SOURCES = [
+#     "alloca.h",
+#     "ctype.h",
+#     "dirent.h",
+#     # "errno.h",
+#     "error.h",
+#     "fcntl.h",
+#     # "fnmatch.h",
+#     # "getopt.h",
+#     # "getopt-cdefs.h",
+#     "malloc/dynarray.gl.h",
+#     "malloc/dynarray-skeleton.gl.h",
+#     "inttypes.h",
+#     "langinfo.h",
+#     "limits.h",
+#     "locale.h",
+#     "pthread.h",
+#     "sched.h",
+#     "signal.h",
+#     "sigsegv.h",
+#     # "stdarg.h",
+#     # "stdbit.h",
+#     "stdckdint.h",
+#     "stddef.h" ,
+#     # "stdint.h" ,
+#     "stdio.h",
+#     "stdlib.h",
+#     "string.h",
+#     "strings.h",
+#     "sys/random.h",
+#     "sys/stat.h",
+#     "sys/time.h",
+#     "sys/types.h",
+#     "sys/wait.h",
+#     "time.h",
+#     "uchar.h" ,
+#     "unicase.h",
+#     "unictype.h",
+#     "uninorm.h",
+#     "unistd.h",
+#     "unistr.h",
+#     "unitypes.h",
+#     "uniwidth.h",
+#     "wchar.h",
+#     "wctype.h",
+# ] + select({
+#     "@platforms//os:macos": [
+#         "assert.h",
+#     ],
+#     "//conditions:default": []
+# })
 
 [
     genrule(
@@ -239,8 +292,9 @@ BUILT_SOURCES = {
         #     ),
         # }),
         tools = ["@sed"],
+        tags = ["manual"],
     )
-    for hdr, template in BUILT_SOURCES.items()
+    for hdr, template in GENERATED_HEADERS.items()
 ]
 
 
@@ -248,7 +302,10 @@ cc_library(
     name = "diffutils",
     srcs = SOURCES +
     glob(["**/*.h"], ["**/*.in.h"]) +
-    BUILT_SOURCES.keys(),
+    select({
+        "@platforms//os:linux": LINUX_GENERATED_HEADERS,
+        "//conditions:default": []
+    }),
     deps = [
         ":diffutils_a-fopen",
         ":diffutils_a-mbsrtoc32s-state",
