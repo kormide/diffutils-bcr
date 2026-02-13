@@ -243,8 +243,6 @@ GENERATED_HEADERS = {
 #     "//conditions:default": []
 # })
 
-print(MACOS_DELETE_BETWEEN_PATTERNS)
-
 USES_DIRECT_REPLACEMENTS = [
     "assert.h",
     "malloc/dynarray-skeleton.gl.h"
@@ -270,20 +268,19 @@ USES_DIRECT_REPLACEMENTS = [
                 # use_direct_vars = False
                 use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
             ),
-            "//conditions:default": "",
-            # "//conditions:default": sed_command(
-            #     automake_vars = LINUX_AUTOMAKE_VARS,
-            #     delete_vars = LINUX_DELETE_VARS,
-            #     direct_vars = LINUX_DIRECT_VARS,
-            #     inline_vars = LINUX_INLINE_VARS,
-            #     sed = "@sed",
-            #     template = template,
-            #     delete_between = LINUX_DELETE_BETWEEN_PATTERNS,
-            #     use_direct_vars = False
-            #     # use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
-            # ),
+            "//conditions:default": sed_command(
+                automake_vars = LINUX_AUTOMAKE_VARS,
+                delete_vars = LINUX_DELETE_VARS,
+                direct_vars = LINUX_DIRECT_VARS,
+                inline_vars = LINUX_INLINE_VARS,
+                sed = "@sed",
+                template = template,
+                delete_between = LINUX_DELETE_BETWEEN_PATTERNS,
+                use_direct_vars = False
+                # use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
+            ),
         }),
-        
+
         # cmd_bat = select({
         #     "@platforms//os:macos": sed_command(
         #         automake_vars = MACOS_AUTOMAKE_VARS,
