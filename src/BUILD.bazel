@@ -1,81 +1,87 @@
 cc_binary(
-  name = "diff",
-  srcs = [
-      "analyze.c",
-      "context.c",
-      "diff.c",
-      "dir.c",
-      "ed.c",
-      "ifdef.c",
-      "io.c",
-      "normal.c",
-      "paths.h",
-      "side.c",
-      "system.c",
-      "util.c"
-  ] + [
-      "diff.h",
-      "system.h",
-  ],
-  deps = [
-      "//lib:diffutils",
-      ":ver",
-  ],
-  includes = ["../lib"],
+    name = "diff",
+    srcs = [
+        "analyze.c",
+        "context.c",
+        "diff.c",
+        "dir.c",
+        "ed.c",
+        "ifdef.c",
+        "io.c",
+        "normal.c",
+        "paths.h",
+        "side.c",
+        "system.c",
+        "util.c",
+    ] + [
+        "diff.h",
+        "system.h",
+    ],
+    includes = ["../lib"],
+    deps = [
+        ":ver",
+        "//lib:diffutils",
+    ],
 )
 
 cc_binary(
-  name = "cmp",
-  srcs = [
-      "cmp.c",
-      "paths.h",
-      "system.c",
-  ] + [
-      "system.h",
-  ],
-  deps = [
-      "//lib:diffutils",
-      ":ver",
-  ],
-  includes = ["../lib"],
+    name = "cmp",
+    srcs = [
+        "cmp.c",
+        "paths.h",
+        "system.c",
+    ] + [
+        "system.h",
+    ],
+    includes = ["../lib"],
+    deps = [
+        ":ver",
+        "//lib:diffutils",
+    ],
 )
 
 cc_binary(
-  name = "sdiff",
-  srcs = [
-      "sdiff.c",
-      "paths.h",
-      "system.c",
-  ] + [
-      "system.h",
-  ],
-  deps = [
-      "//lib:diffutils",
-      ":ver",
-  ],
-  includes = ["../lib"],
+    name = "sdiff",
+    srcs = [
+        "paths.h",
+        "sdiff.c",
+        "system.c",
+    ] + [
+        "system.h",
+    ],
+    includes = ["../lib"],
+    deps = [
+        ":ver",
+        "//lib:diffutils",
+    ],
 )
 
 cc_binary(
-  name = "diff3",
-  srcs = [
-      "diff3.c",
-      "paths.h",
-      "system.c",
-  ] + [
-      "system.h",
-  ],
-  deps = [
-      "//lib:diffutils",
-      ":ver",
-  ],
-  includes = ["../lib"],
+    name = "diff3",
+    srcs = [
+        "diff3.c",
+        "paths.h",
+        "system.c",
+    ] + [
+        "system.h",
+    ],
+    includes = ["../lib"],
+    deps = [
+        ":ver",
+        "//lib:diffutils",
+    ],
 )
 
 cc_library(
     name = "ver",
-    srcs = ["version.c", "version.h"],
+    srcs = [
+        "version.c",
+        "version.h",
+    ],
     hdrs = ["version.h"],
+    includes = [
+        ".",
+        "../lib",
+    ],
     deps = ["//lib:diffutils"],
-    includes = [".", "../lib"],
 )

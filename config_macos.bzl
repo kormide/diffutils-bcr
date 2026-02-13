@@ -1721,5 +1721,5 @@ DELETE_BETWEEN_PATTERNS = [
     [
         "assert.h",
         "start",
-    ]
+    ],
 ]

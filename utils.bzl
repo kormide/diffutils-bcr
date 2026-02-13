@@ -45,7 +45,6 @@ def sed_command(
         for key, val in direct_vars.items():
             sed_args.append(_REPLACE_TEMPLATE.format(key, val))
 
-
     for key in delete_vars:
         sed_args.append(_DELETE_TEMPLATE.format(key))
 
