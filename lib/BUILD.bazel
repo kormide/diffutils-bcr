@@ -2,7 +2,6 @@ load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
 load("//:utils.bzl", "sed_command")
 load(
     "//:config_linux.bzl",
-    LINUX_GENERATED_HEADERS = "GENERATED_HEADERS",
     LINUX_AUTOMAKE_VARS = "AUTOMAKE_VARIABLES",
     LINUX_DELETE_VARS = "DELETE_VARIABLES",
     LINUX_DIRECT_VARS = "DIRECT_VARIABLES",
@@ -12,7 +11,6 @@ load(
 
 load(
     "//:config_macos.bzl",
-    MACOS_GENERATED_HEADERS = "GENERATED_HEADERS",
     MACOS_AUTOMAKE_VARS = "AUTOMAKE_VARIABLES",
     MACOS_DELETE_VARS = "DELETE_VARIABLES",
     MACOS_DIRECT_VARS = "DIRECT_VARIABLES",
@@ -318,13 +316,74 @@ USES_DIRECT_REPLACEMENTS = [
 cc_library(
     name = "diffutils",
     srcs = SOURCES +
-    glob(["**/*.h"], ["**/*.in.h"]) +
+    glob(["**/*.h"], ["**/*.in.h"]) + [
+        "ctype.h",
+        "dirent.h",
+        "error.h",
+        "fcntl.h",
+        "malloc/dynarray.gl.h",
+        "malloc/dynarray-skeleton.gl.h",
+        "inttypes.h",
+        "langinfo.h",
+        "locale.h",
+        "pthread.h",
+        "sched.h",
+        "signal.h",
+        "stdio.h",
+        "stdlib.h",
+        "string.h",
+        "strings.h",
+        "sys/random.h",
+        "sys/stat.h",
+        "sys/time.h",
+        "sys/types.h",
+        "sys/wait.h",
+        "time.h",
+        "uchar.h" ,
+        "unistd.h",
+        "wchar.h",
+        "wctype.h",
+    ] +
+     select({
+        "@platforms//os:macos": [
+            "alloca.h",
+            "assert.h",
+            "fnmatch.h",
+            "getopt.h",
+            "getopt-cdefs.h",
+            "limits.h",
+            "sigsegv.h",
+            "stdbit.h",
+            "stdckdint.h",
+            "stddef.h",
+            "stdint.h",
+            "unicase.h",
+            "unictype.h",
+            "uninorm.h",
+            "unistr.h",
+            "unitypes.h",
+            "uniwidth.h",
+        ],
+        "//conditions:default": [
+            "alloca.h",
+            "limits.h",
+            "sigsegv.h",
+            "stdckdint.h",
+            "stddef.h",
+            "unicase.h",
+            "unictype.h",
+            "uninorm.h",
+            "unistr.h",
+            "unitypes.h",
+            "uniwidth.h",
+        ]
+    }) +
     select({
-        "@platforms//os:macos": MACOS_GENERATED_HEADERS + [
+        "@platforms//os:macos": [
              "setlocale-lock.c",
              "mktime.c",
         ],
-        "//conditions:default": LINUX_GENERATED_HEADERS
+        "//conditions:default": []
     }),
     deps = [
         ":diffutils_a-fopen",
