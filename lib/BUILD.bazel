@@ -198,7 +198,7 @@ SOURCES = [
     ],
 })
 
-GENERATED_HEADERS = {
+BUILT_SOURCES = {
     "alloca.h": "alloca.in.h",
     "assert.h": "assert.in.h",
     "ctype.h": "ctype.in.h",
@@ -309,7 +309,7 @@ USES_DIRECT_REPLACEMENTS = [
         tools = ["@sed"],
         tags = ["manual"],
     )
-    for hdr, template in GENERATED_HEADERS.items()
+    for hdr, template in BUILT_SOURCES.items()
 ]
 
 
