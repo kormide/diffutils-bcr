@@ -141,7 +141,10 @@ SOURCES = [
     "xstrtoul.c",
     "cmpbuf.c",
     "diagnose.c",
-]
+] + select({
+    "@platforms//os:macos": [],
+    "//conditions:default": [],
+})
 
 GENERATED_HEADERS = {
     "alloca.h": "alloca.in.h",
@@ -190,58 +193,6 @@ GENERATED_HEADERS = {
     "wchar.h": "wchar.in.h",
     "wctype.h": "wctype.in.h",
 }
-
-# BUILD_SOURCES = [
-#     "alloca.h",
-#     "ctype.h",
-#     "dirent.h",
-#     # "errno.h",
-#     "error.h",
-#     "fcntl.h",
-#     # "fnmatch.h",
-#     # "getopt.h",
-#     # "getopt-cdefs.h",
-#     "malloc/dynarray.gl.h",
-#     "malloc/dynarray-skeleton.gl.h",
-#     "inttypes.h",
-#     "langinfo.h",
-#     "limits.h",
-#     "locale.h",
-#     "pthread.h",
-#     "sched.h",
-#     "signal.h",
-#     "sigsegv.h",
-#     # "stdarg.h",
-#     # "stdbit.h",
-#     "stdckdint.h",
-#     "stddef.h" ,
-#     # "stdint.h" ,
-#     "stdio.h",
-#     "stdlib.h",
-#     "string.h",
-#     "strings.h",
-#     "sys/random.h",
-#     "sys/stat.h",
-#     "sys/time.h",
-#     "sys/types.h",
-#     "sys/wait.h",
-#     "time.h",
-#     "uchar.h" ,
-#     "unicase.h",
-#     "unictype.h",
-#     "uninorm.h",
-#     "unistd.h",
-#     "unistr.h",
-#     "unitypes.h",
-#     "uniwidth.h",
-#     "wchar.h",
-#     "wctype.h",
-# ] + select({
-#     "@platforms//os:macos": [
-#         "assert.h",
-#     ],
-#     "//conditions:default": []
-# })
 
 USES_DIRECT_REPLACEMENTS = [
     "assert.h",
@@ -319,6 +270,7 @@ cc_library(
         "//conditions:default": LINUX_GENERATED_HEADERS
     }),
     deps = [
+        # gl_libdiffutils_LIBOBJS
         ":diffutils_a-fopen",
         ":diffutils_a-mbsrtoc32s-state",
         ":diffutils_a-mbsrtowcs-state",
