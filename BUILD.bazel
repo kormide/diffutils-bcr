@@ -1,0 +1,19 @@
+alias(
+    name = "cmp",
+    actual = "//src:cmp"
+)
+
+alias(
+    name = "diff",
+    actual = "//src:diff"
+)
+
+alias(
+    name = "diff3",
+    actual = "//src:diff3"
+)
+
+alias(
+    name = "sdiff",
+    actual = "//src:sdiff"
+)
