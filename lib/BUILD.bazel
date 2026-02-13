@@ -324,15 +324,66 @@ cc_library(
         "//conditions:default": LINUX_GENERATED_HEADERS
     }),
     deps = [
-        # gl_libdiffutils_LIBOBJS
         ":diffutils_a-fopen",
         ":diffutils_a-mbsrtoc32s-state",
-        ":diffutils_a-mbsrtowcs-state",
         ":diffutils_a-mktime",
-    ],
+    ] + select({
+        "@platforms//os:macos": [
+            ":diffutils_a-fnmatch",
+        ],
+        "//conditions:default": [
+            ":diffutils_a-mbsrtowcs-state",
+        ]
+    }),
+
     textual_hdrs = ["xstrtol.c", "strftime.c"],
     includes = ["."],
     visibility = ["//src:__subpackages__"]
+)
+
+cc_library(
+    name = "diffutils_a-fnmatch",
+    srcs = [
+        "fnmatch.c",
+        "fnmatch.h",
+        # "libc-config.h",
+        "config.h",
+        # "cdefs.h",
+        "stdckdint.h",
+        # "intprops-internal.h",
+        "uchar.h",
+        # "attribute.h",
+        # "flexmember.h",
+        # "idx.h",
+
+        # "exclude.c",
+        # "exclude.h",
+        # "filename.h",
+        # "hash.h",
+        # "mcel.h",
+        # "verify.h",
+        # "xalloc.h",
+        # "unlocked-io.h",
+        # "mbscasecmp.c",
+        # "wchar.h",
+        # "ctype.h",
+
+        # "wchar.h",
+        "string.h",
+        "wmempcpy.c",
+        "mempcpy.c",
+        # "fnmatch_loop.c",
+
+        # "filenamecat.h",
+        # "basename-lgpl.h",
+        # "filename.h",
+        # "filenamecat-lgpl.c",
+    ] + glob(["**/*.h", "**/*.in.h"]),
+    includes = ["."],
+    textual_hdrs = ["fnmatch_loop.c"],
+    target_compatible_with = [
+        "@platforms//os:macos"
+    ],
 )
 
 cc_library(
@@ -361,7 +412,10 @@ cc_library(
         "mbsrtowcs-state.c",
         "config.h",
     ],
-    includes = ["."]
+    includes = ["."],
+    target_compatible_with = [
+        "@platforms//os:linux"
+    ]
 )
 
 cc_library(
@@ -374,7 +428,12 @@ cc_library(
         "intprops.h",
         "intprops-internal.h",
         "mktime-internal.h",
-    ],
+    ] + select({
+        "@platforms//os:macos": [
+            "cdefs.h"
+        ],
+        "//conditions:default": [],
+    }),
     includes = ["."]
 )
 
