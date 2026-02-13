@@ -320,7 +320,10 @@ cc_library(
     srcs = SOURCES +
     glob(["**/*.h"], ["**/*.in.h"]) +
     select({
-        "@platforms//os:macos": MACOS_GENERATED_HEADERS,
+        "@platforms//os:macos": MACOS_GENERATED_HEADERS + [
+             "setlocale-lock.c",
+             "mktime.c",
+        ],
         "//conditions:default": LINUX_GENERATED_HEADERS
     }),
     deps = [
