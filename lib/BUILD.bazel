@@ -198,7 +198,69 @@ SOURCES = [
     ],
 })
 
-BUILT_SOURCES = {
+BUILT_SOURCES = [
+        "ctype.h",
+        "dirent.h",
+        "error.h",
+        "fcntl.h",
+        "malloc/dynarray.gl.h",
+        "malloc/dynarray-skeleton.gl.h",
+        "inttypes.h",
+        "langinfo.h",
+        "locale.h",
+        "pthread.h",
+        "sched.h",
+        "signal.h",
+        "stdio.h",
+        "stdlib.h",
+        "string.h",
+        "strings.h",
+        "sys/random.h",
+        "sys/stat.h",
+        "sys/time.h",
+        "sys/types.h",
+        "sys/wait.h",
+        "time.h",
+        "uchar.h" ,
+        "unistd.h",
+        "wchar.h",
+        "wctype.h",
+    ] + select({
+        "@platforms//os:macos": [
+            "alloca.h",
+            "assert.h",
+            "fnmatch.h",
+            "getopt.h",
+            "getopt-cdefs.h",
+            "limits.h",
+            "sigsegv.h",
+            "stdbit.h",
+            "stdckdint.h",
+            "stddef.h",
+            "stdint.h",
+            "unicase.h",
+            "unictype.h",
+            "uninorm.h",
+            "unistr.h",
+            "unitypes.h",
+            "uniwidth.h",
+        ],
+        "//conditions:default": [
+            "alloca.h",
+            "limits.h",
+            "sigsegv.h",
+            "stdckdint.h",
+            "stddef.h",
+            "unicase.h",
+            "unictype.h",
+            "uninorm.h",
+            "unistr.h",
+            "unitypes.h",
+            "uniwidth.h",
+        ]
+    })
+
+HEADER_TEMPLATES = {
     "alloca.h": "alloca.in.h",
     "assert.h": "assert.in.h",
     "ctype.h": "ctype.in.h",
@@ -285,75 +347,15 @@ USES_DIRECT_REPLACEMENTS = [
         tools = ["@sed"],
         tags = ["manual"],
     )
-    for hdr, template in BUILT_SOURCES.items()
+    for hdr, template in HEADER_TEMPLATES.items()
 ]
 
 
 cc_library(
     name = "diffutils",
     srcs = SOURCES +
-    glob(["**/*.h"], ["**/*.in.h"]) + [
-        "ctype.h",
-        "dirent.h",
-        "error.h",
-        "fcntl.h",
-        "malloc/dynarray.gl.h",
-        "malloc/dynarray-skeleton.gl.h",
-        "inttypes.h",
-        "langinfo.h",
-        "locale.h",
-        "pthread.h",
-        "sched.h",
-        "signal.h",
-        "stdio.h",
-        "stdlib.h",
-        "string.h",
-        "strings.h",
-        "sys/random.h",
-        "sys/stat.h",
-        "sys/time.h",
-        "sys/types.h",
-        "sys/wait.h",
-        "time.h",
-        "uchar.h" ,
-        "unistd.h",
-        "wchar.h",
-        "wctype.h",
-    ] +
-     select({
-        "@platforms//os:macos": [
-            "alloca.h",
-            "assert.h",
-            "fnmatch.h",
-            "getopt.h",
-            "getopt-cdefs.h",
-            "limits.h",
-            "sigsegv.h",
-            "stdbit.h",
-            "stdckdint.h",
-            "stddef.h",
-            "stdint.h",
-            "unicase.h",
-            "unictype.h",
-            "uninorm.h",
-            "unistr.h",
-            "unitypes.h",
-            "uniwidth.h",
-        ],
-        "//conditions:default": [
-            "alloca.h",
-            "limits.h",
-            "sigsegv.h",
-            "stdckdint.h",
-            "stddef.h",
-            "unicase.h",
-            "unictype.h",
-            "uninorm.h",
-            "unistr.h",
-            "unitypes.h",
-            "uniwidth.h",
-        ]
-    }) +
+    glob(["**/*.h"], ["**/*.in.h"]) +
+    BUILT_SOURCES +
     select({
         "@platforms//os:macos": [
              "setlocale-lock.c",
