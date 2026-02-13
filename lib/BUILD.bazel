@@ -336,7 +336,16 @@ cc_library(
         ]
     }),
 
-    textual_hdrs = ["xstrtol.c", "strftime.c"],
+    textual_hdrs = ["xstrtol.c", "strftime.c"] + select({
+        "@platforms//os:macos": [
+            "regex_internal.c",
+            "strtol.c",
+            "regcomp.c",
+            "regexec.c",
+            "malloc/dynarray-skeleton.c",
+        ],
+        "//conditions:default": []
+    }),
     includes = ["."],
     visibility = ["//src:__subpackages__"]
 )
@@ -346,39 +355,18 @@ cc_library(
     srcs = [
         "fnmatch.c",
         "fnmatch.h",
-        # "libc-config.h",
+        "libc-config.h",
         "config.h",
-        # "cdefs.h",
+        "cdefs.h",
         "stdckdint.h",
-        # "intprops-internal.h",
+        "intprops-internal.h",
+        "attribute.h",
+        "flexmember.h",
         "uchar.h",
-        # "attribute.h",
-        # "flexmember.h",
-        # "idx.h",
-
-        # "exclude.c",
-        # "exclude.h",
-        # "filename.h",
-        # "hash.h",
-        # "mcel.h",
-        # "verify.h",
-        # "xalloc.h",
-        # "unlocked-io.h",
-        # "mbscasecmp.c",
-        # "wchar.h",
-        # "ctype.h",
-
-        # "wchar.h",
         "string.h",
-        "wmempcpy.c",
-        "mempcpy.c",
-        # "fnmatch_loop.c",
-
-        # "filenamecat.h",
-        # "basename-lgpl.h",
-        # "filename.h",
-        # "filenamecat-lgpl.c",
-    ] + glob(["**/*.h", "**/*.in.h"]),
+        "idx.h",
+        "wchar.h",
+    ],
     includes = ["."],
     textual_hdrs = ["fnmatch_loop.c"],
     target_compatible_with = [
