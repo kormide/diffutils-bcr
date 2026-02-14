@@ -1322,8 +1322,6 @@ AUTOMAKE_VARIABLES = {
 }
 
 DIRECT_VARIABLES = {
-    "__always_inline": "inline _GL_ATTRIBUTE_ALWAYS_INLINE",
-    "__glibc_likely": "_GL_LIKELY",
     "__glibc_unlikely": "_GL_UNLIKELY",
     "__attribute_nonnull__": "_GL_ATTRIBUTE_NONNULL",
     "__attribute_maybe_unused__": "_GL_ATTRIBUTE_MAYBE_UNUSED",
@@ -1341,5 +1339,3 @@ INLINE_VARIABLES = {
 DELETE_VARIABLES = [
     "libc_hidden_proto",
 ]
-
-DELETE_BETWEEN_PATTERNS = []

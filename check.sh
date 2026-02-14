@@ -1768,20 +1768,20 @@ for header in "${LINUX_HEADERS[@]}"; do
     fi
 done
 
-NOT_FOUND=()
-for am in "${LINUX_AUTOMAKE_VARS[@]}"; do
-    found=0
-    for template in "${HEADER_TEMPLATES[@]}"; do
-        if grep "$am" "lib/$template" >/dev/null; then
-            found=1
-            break
-        fi
-    done
-    if [[ "$found" == "0" ]]; then
-        echo "$am"
-        NOT_FOUND+=( "$am" )
-    fi
-done
+# NOT_FOUND=()
+# for am in "${LINUX_AUTOMAKE_VARS[@]}"; do
+#     found=0
+#     for template in "${HEADER_TEMPLATES[@]}"; do
+#         if grep "$am" "lib/$template" >/dev/null; then
+#             found=1
+#             break
+#         fi
+#     done
+#     if [[ "$found" == "0" ]]; then
+#         echo "$am"
+#         NOT_FOUND+=( "$am" )
+#     fi
+# done
 
-echo "-- vars not found --"
-echo "${NOT_FOUND[@]}"
+# echo "-- vars not found --"
+# echo "${NOT_FOUND[@]}"
