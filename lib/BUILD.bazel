@@ -2,7 +2,6 @@ load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
 load(
     "//:config_linux.bzl",
     LINUX_AUTOMAKE_VARS = "AUTOMAKE_VARIABLES",
-    LINUX_DELETE_BETWEEN_PATTERNS = "DELETE_BETWEEN_PATTERNS",
     LINUX_DELETE_VARS = "DELETE_VARIABLES",
     LINUX_DIRECT_VARS = "DIRECT_VARIABLES",
     LINUX_INLINE_VARS = "INLINE_VARIABLES",
@@ -10,7 +9,6 @@ load(
 load(
     "//:config_macos.bzl",
     MACOS_AUTOMAKE_VARS = "AUTOMAKE_VARIABLES",
-    MACOS_DELETE_BETWEEN_PATTERNS = "DELETE_BETWEEN_PATTERNS",
     MACOS_DELETE_VARS = "DELETE_VARIABLES",
     MACOS_DIRECT_VARS = "DIRECT_VARIABLES",
     MACOS_INLINE_VARS = "INLINE_VARIABLES",
@@ -323,7 +321,6 @@ USES_DIRECT_REPLACEMENTS = [
         cmd = select({
             "@platforms//os:osx": sed_command(
                 automake_vars = MACOS_AUTOMAKE_VARS,
-                delete_between = MACOS_DELETE_BETWEEN_PATTERNS,
                 delete_vars = MACOS_DELETE_VARS,
                 direct_vars = MACOS_DIRECT_VARS,
                 inline_vars = MACOS_INLINE_VARS,
@@ -334,7 +331,6 @@ USES_DIRECT_REPLACEMENTS = [
             ),
             "//conditions:default": sed_command(
                 automake_vars = LINUX_AUTOMAKE_VARS,
-                delete_between = LINUX_DELETE_BETWEEN_PATTERNS,
                 delete_vars = LINUX_DELETE_VARS,
                 direct_vars = LINUX_DIRECT_VARS,
                 inline_vars = LINUX_INLINE_VARS,

@@ -6,7 +6,7 @@ _INLINE_TEMPLATE = "-e '/{}/r $(execpath {})' \\"
 
 _DELETE_TEMPLATE = "-e '/{}/d' \\"
 
-_DELETE_BETWEEN_TEMPLATE = "-e '/{}/,/{}/d' \\"
+# _DELETE_BETWEEN_TEMPLATE = "-e '/{}/,/{}/d' \\"
 
 def sed_command(
         *,
@@ -16,7 +16,6 @@ def sed_command(
         inline_vars,
         delete_vars,
         direct_vars,
-        delete_between,
         use_direct_vars = False,
         is_windows = False):
     """Generate a sed command for producing generated bison source files.
