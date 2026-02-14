@@ -262,7 +262,7 @@ HEADER_TEMPLATES = {
     "assert.h": "assert.in.h",
     "ctype.h": "ctype.in.h",
     "dirent.h": "dirent.in.h",
-    # "errno.h": "errno.in.h",
+    "errno.h": "errno.in.h",
     "error.h": "error.in.h",
     "fcntl.h": "fcntl.in.h",
     "fnmatch.h": "fnmatch.in.h",
