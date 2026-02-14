@@ -34,7 +34,10 @@ def sed_command(
     Returns:
         str: The sed command
     """
-    sed_args = []
+    sed_args = [
+        "-e '1 i\\/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' \\"
+    ]
+
     for key, val in automake_vars.items():
         sed_args.append(_REPLACE_TEMPLATE.format(key, val))
 
