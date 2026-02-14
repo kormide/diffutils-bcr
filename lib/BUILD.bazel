@@ -326,7 +326,6 @@ USES_DIRECT_REPLACEMENTS = [
                 inline_vars = MACOS_INLINE_VARS,
                 sed = "@sed",
                 template = template,
-                # use_direct_vars = False
                 use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
             ),
             "//conditions:default": sed_command(

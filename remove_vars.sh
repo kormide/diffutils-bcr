@@ -1,4 +1,5 @@
 REMOVE_VARS=(
+    @GL_GENERATE_ASSERT_H_TRUE@
     @GNULIB_ACOSF@
     @GNULIB_ACOSL@
     @GNULIB_ASINF@
@@ -354,5 +355,8 @@ for var in "${REMOVE_VARS[@]}"; do
     var=${var#@}
     var=${var%@}
     echo "$var"
-    sed -i "/@''$var''@/d" config_linux.bzl
+    # sed -i "/@''$var''@/d" "config_linux.bzl"
+
+    # macos
+    sed -i "" "/@''$var''@/d" "config_macos.bzl"
 done
