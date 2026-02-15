@@ -378,8 +378,11 @@ cc_library(
            BUILT_SOURCES +
            select({
                "@platforms//os:macos": [
-                   "mktime.c",
-                   "setlocale-lock.c",
+                    # TODO: unclear why the following are needed to avoid
+                    # linking errors on osx. mktime.c should be linked in
+                    # via the dep on :diffutils_a-mktime.
+                    "mktime.c",
+                    "setlocale-lock.c",
                ],
                "//conditions:default": [],
            }),
@@ -471,11 +474,11 @@ cc_library(
 cc_library(
     name = "diffutils_a-mktime",
     srcs = [
+        "mktime.c",
         "config.h",
         "intprops.h",
         "intprops-internal.h",
         "libc-config.h",
-        "mktime.c",
         "mktime-internal.h",
         "stdckdint.h",
     ] + select({
