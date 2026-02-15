@@ -1,3 +1,7 @@
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
+
+PACKAGE_VERSION="3.12"
+
 cc_binary(
     name = "diff",
     srcs = [
@@ -88,4 +92,22 @@ cc_library(
         "../lib",
     ],
     deps = ["//lib:diffutils"],
+)
+
+write_file(
+    name = "version_h",
+    out = "version.h",
+    content = [
+        "extern char const *Version;\n"
+    ]
+)
+
+write_file(
+    name = "version_c",
+    out = "version.c",
+    content = [
+        "#include <config.h>",
+        "#include <version.h>",
+        "char const *Version = \"{}\";".format(PACKAGE_VERSION)
+    ]
 )
