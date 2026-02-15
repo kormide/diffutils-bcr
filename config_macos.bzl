@@ -1350,8 +1350,6 @@ DIRECT_VARIABLES = {
     "<malloc/dynarray.h>": "<malloc/dynarray.gl.h>",
     "_gl_verify": "_gl_static_assert",
     "_GL_VERIFY": "_GL_STATIC_ASSERT",
-    # "_GL": "_GL_UNLIKELY",
-    # "_GL_STATIC_ASSERT_H": "_GL",
 }
 
 INLINE_VARIABLES = {

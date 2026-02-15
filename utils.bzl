@@ -6,8 +6,6 @@ _INLINE_TEMPLATE = "-e '/{}/r $(execpath {})' \\"
 
 _DELETE_TEMPLATE = "-e '/{}/d' \\"
 
-# _DELETE_BETWEEN_TEMPLATE = "-e '/{}/,/{}/d' \\"
-
 def sed_command(
         *,
         sed,
@@ -17,8 +15,8 @@ def sed_command(
         delete_vars,
         direct_vars,
         use_direct_vars = False,
-        is_windows = False,
-        generated_header = True):
+        generated_header = True,
+        is_windows = False):
     """Generate a sed command for producing generated bison source files.
 
     Args:
@@ -29,6 +27,7 @@ def sed_command(
         delete_vars (list): Deletion keys for removing lines.
         direct_vars (dict): Mappings of template keys to variables.
         use_direct_vars (bool, optional): Whether or not to use `direct_vars` at all.
+        generated_header (bool, optional): Whether or not to add a header comment that the Makefile adds to generated sources. Defaults to True,
         is_windows (bool, optional): Whether or not to generate a bat command.
 
     Returns:
@@ -52,9 +51,6 @@ def sed_command(
     for key in delete_vars:
         sed_args.append(_DELETE_TEMPLATE.format(key))
     
-    # for [a, b] in delete_between:
-    #     sed_args.append(_DELETE_BETWEEN_TEMPLATE.format(a, b))
-
     command = _CMD_TEMPLATE.format(
         sed,
         "\n".join(sed_args).strip("\\\n"),
