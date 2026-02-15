@@ -95,10 +95,19 @@ cc_library(
 )
 
 write_file(
+    name = "paths_h",
+    out = "paths.h",
+    content = [
+        "#define DEFAULT_DIFF_PROGRAM \"diff\"",
+        "#define LOCALEDIR \"/usr/local/share/locale\""
+    ]
+)
+
+write_file(
     name = "version_h",
     out = "version.h",
     content = [
-        "extern char const *Version;\n"
+        "extern char const *Version;"
     ]
 )
 
