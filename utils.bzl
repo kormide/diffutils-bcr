@@ -17,7 +17,8 @@ def sed_command(
         delete_vars,
         direct_vars,
         use_direct_vars = False,
-        is_windows = False):
+        is_windows = False,
+        generated_header = True):
     """Generate a sed command for producing generated bison source files.
 
     Args:
@@ -33,9 +34,10 @@ def sed_command(
     Returns:
         str: The sed command
     """
-    sed_args = [
-        "-e '1 i\\/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' \\"
-    ]
+    sed_args = []
+
+    if generated_header:
+        sed_args.append("-e '1 i\\/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' \\")
 
     for key, val in automake_vars.items():
         sed_args.append(_REPLACE_TEMPLATE.format(key, val))
@@ -49,7 +51,7 @@ def sed_command(
 
     for key in delete_vars:
         sed_args.append(_DELETE_TEMPLATE.format(key))
-
+    
     # for [a, b] in delete_between:
     #     sed_args.append(_DELETE_BETWEEN_TEMPLATE.format(a, b))
 

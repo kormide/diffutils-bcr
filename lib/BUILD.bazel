@@ -259,7 +259,7 @@ BUILT_SOURCES = [
 
 HEADER_TEMPLATES = {
     "alloca.h": "alloca.in.h",
-    "assert.h": "assert.in.h",
+    "assert.almost.in.h": "assert.in.h", # special case, see assert.h generation below
     "ctype.h": "ctype.in.h",
     "dirent.h": "dirent.in.h",
     "errno.h": "errno.in.h",
@@ -306,8 +306,11 @@ HEADER_TEMPLATES = {
 }
 
 USES_DIRECT_REPLACEMENTS = [
+    # "assert.almost.in.h",
+    # "assert.in.h",
     "assert.h",
     "malloc/dynarray-skeleton.gl.h",
+    "assert_two.h",
 ]
 
 [
@@ -343,6 +346,38 @@ USES_DIRECT_REPLACEMENTS = [
     )
     for hdr, template in HEADER_TEMPLATES.items()
 ]
+
+# Perform a second sed pass to produce assert.h. Because it uses
+# an inline file substition, the second delete between operation
+# won't work as a chained command because the inlined file will not
+# be in the pattern buffer.
+REPLACE_BETWEEN="/omit start/,/omit end/d"
+genrule(
+    name = "assert_two_h",
+    srcs = ["assert.almost.in.h"],
+    outs = ["assert_two.h"],
+    cmd = "$(execpath @sed) $(execpath assert.almost.in.h) -e '{}' > $@".format(REPLACE_BETWEEN),    
+    tags = ["manual"],
+    tools = ["@sed"],
+)
+
+genrule(
+    name = "assert_h",
+    srcs = ["assert_two.h"] + MACOS_INLINE_VARS.values(),
+    outs = ["assert.h"],
+    cmd = sed_command(
+        automake_vars = MACOS_AUTOMAKE_VARS,
+        delete_vars = MACOS_DELETE_VARS,
+        direct_vars = MACOS_DIRECT_VARS,
+        inline_vars = {},
+        sed = "@sed",
+        template = "assert_two.h",
+        use_direct_vars = True,
+        generated_header = False
+    ),
+    tags = ["manual"],
+    tools = ["@sed"],
+)
 
 cc_library(
     name = "diffutils",

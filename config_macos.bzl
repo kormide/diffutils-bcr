@@ -1342,11 +1342,16 @@ AUTOMAKE_VARIABLES = {
 }
 
 DIRECT_VARIABLES = {
+    
     "__glibc_unlikely": "_GL_UNLIKELY",
     "__attribute_nonnull__": "_GL_ATTRIBUTE_NONNULL",
     "__attribute_maybe_unused__": "_GL_ATTRIBUTE_MAYBE_UNUSED",
     "__attribute_warn_unused_result__": "_GL_ATTRIBUTE_NODISCARD",
     "<malloc/dynarray.h>": "<malloc/dynarray.gl.h>",
+    "_gl_verify": "_gl_static_assert",
+    "_GL_VERIFY": "_GL_STATIC_ASSERT",
+    # "_GL": "_GL_UNLIKELY",
+    # "_GL_STATIC_ASSERT_H": "_GL",
 }
 
 INLINE_VARIABLES = {
