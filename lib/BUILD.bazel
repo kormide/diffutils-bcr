@@ -475,18 +475,14 @@ cc_library(
     name = "diffutils_a-mktime",
     srcs = [
         "mktime.c",
+        "cdefs.h",
         "config.h",
         "intprops.h",
         "intprops-internal.h",
         "libc-config.h",
         "mktime-internal.h",
         "stdckdint.h",
-    ] + select({
-        "@platforms//os:macos": [
-            "cdefs.h",
-        ],
-        "//conditions:default": [],
-    }),
+    ],
     includes = ["."],
 )
 
