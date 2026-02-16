@@ -490,7 +490,16 @@ copy_file(
     name = "config_h",
     src = select({
         "@platforms//os:macos": "config_macos.h",
-        "//conditions:default": "config_linux.h",
+        ":is_linux_arm64": "config_linux_arm64.h",
+        "//conditions:default": "config_linux_amd64.h",
     }),
     out = "config.h",
+)
+
+config_setting(
+    name = "is_linux_arm64",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:arm64",
+    ],
 )
