@@ -13,6 +13,7 @@ FILES=(
     lib/config_linux_arm64.h
     lib/config_macos.h
     src/BUILD.bazel
+    test/BUILD.bazel
     utils.bzl
 )
 

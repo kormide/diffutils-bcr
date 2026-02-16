@@ -384,7 +384,7 @@ cc_library(
                     "mktime.c",
                     "setlocale-lock.c",
                ],
-               "//conditions:default": [],
+               "@platforms//os:linux": [],
            }),
     includes = ["."],
     textual_hdrs = [
@@ -409,7 +409,7 @@ cc_library(
         "@platforms//os:macos": [
             ":diffutils_a-fnmatch",
         ],
-        "//conditions:default": [
+        "@platforms//os:linux": [
             ":diffutils_a-mbsrtowcs-state",
         ],
     }),
@@ -491,7 +491,7 @@ copy_file(
     src = select({
         "@platforms//os:macos": "config_macos.h",
         ":is_linux_arm64": "config_linux_arm64.h",
-        "//conditions:default": "config_linux_amd64.h",
+        ":is_linux_amd64": "config_linux_amd64.h",
     }),
     out = "config.h",
 )
@@ -501,5 +501,13 @@ config_setting(
     constraint_values = [
         "@platforms//os:linux",
         "@platforms//cpu:arm64",
+    ],
+)
+
+config_setting(
+    name = "is_linux_amd64",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
     ],
 )
