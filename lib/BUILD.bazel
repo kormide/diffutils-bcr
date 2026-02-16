@@ -373,7 +373,7 @@ cc_library(
     srcs = libdiffutils_a_SOURCES +
            glob(
                ["**/*.h"],
-               ["**/*.in.h"],
+               exclude = ["**/*.in.h"],
            ) +
            BUILT_SOURCES +
            select({

@@ -8,6 +8,7 @@ cc_binary(
         "analyze.c",
         "context.c",
         "diff.c",
+        "diff.h",
         "dir.c",
         "ed.c",
         "ifdef.c",
@@ -16,12 +17,9 @@ cc_binary(
         "paths.h",
         "side.c",
         "system.c",
-        "util.c",
-    ] + [
-        "diff.h",
         "system.h",
+        "util.c",
     ],
-    includes = ["../lib"],
     deps = [
         ":ver",
         "//lib:diffutils",
@@ -35,10 +33,8 @@ cc_binary(
         "cmp.c",
         "paths.h",
         "system.c",
-    ] + [
         "system.h",
     ],
-    includes = ["../lib"],
     deps = [
         ":ver",
         "//lib:diffutils",
@@ -52,10 +48,8 @@ cc_binary(
         "paths.h",
         "sdiff.c",
         "system.c",
-    ] + [
         "system.h",
     ],
-    includes = ["../lib"],
     deps = [
         ":ver",
         "//lib:diffutils",
@@ -69,10 +63,8 @@ cc_binary(
         "diff3.c",
         "paths.h",
         "system.c",
-    ] + [
         "system.h",
     ],
-    includes = ["../lib"],
     deps = [
         ":ver",
         "//lib:diffutils",
@@ -86,10 +78,8 @@ cc_library(
         "version.c",
         "version.h",
     ],
-    hdrs = ["version.h"],
     includes = [
         ".",
-        "../lib",
     ],
     deps = ["//lib:diffutils"],
 )
