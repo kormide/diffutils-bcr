@@ -1002,7 +1002,7 @@ AUTOMAKE_VARIABLES = {
     "@''NEXT_WCTYPE_H''@": "<wctype.h>",
     "@''NULLPTR_T_NEEDS_STDDEF''@": "0",
     "@''PRAGMA_COLUMNS''@": "",
-    "@''PRAGMA_SYSTEM_HEADER''@": "#pragma GCC system_header",
+    "^@''PRAGMA_SYSTEM_HEADER''@": "#pragma GCC system_header",
     "@''PRIPTR_PREFIX''@": "\"l\"",
     "@''PTHREAD_H_DEFINES_STRUCT_TIMESPEC''@": "0",
     "@''PTRDIFF_T_SUFFIX''@": "",
