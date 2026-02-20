@@ -159,7 +159,7 @@ libdiffutils_a_SOURCES = [
         "wcwidth.c",
         "wmempcpy.c",
     ],
-    "//conditions:default": [
+    "@platforms//os:linux": [
         "btowc.c",
         "chdir-long.c",
         "fcntl.c",
@@ -242,7 +242,7 @@ BUILT_SOURCES = [
         "unitypes.h",
         "uniwidth.h",
     ],
-    "//conditions:default": [
+    "@platforms//os:linux": [
         "alloca.h",
         "limits.h",
         "sigsegv.h",
@@ -314,7 +314,7 @@ USES_DIRECT_REPLACEMENTS = [
         name = hdr[:-len(".h")] + "_h",
         srcs = [template] + select({
             "@platforms//os:macos": MACOS_INLINE_VARS.values(),
-            "//conditions:default": LINUX_INLINE_VARS.values(),
+            "@platforms//os:linux": LINUX_INLINE_VARS.values(),
         }),
         outs = [hdr],
         cmd = select({
@@ -327,7 +327,7 @@ USES_DIRECT_REPLACEMENTS = [
                 template = template,
                 use_direct_vars = True if hdr in USES_DIRECT_REPLACEMENTS else False,
             ),
-            "//conditions:default": sed_command(
+            "@platforms//os:linux": sed_command(
                 automake_vars = LINUX_AUTOMAKE_VARS,
                 delete_vars = LINUX_DELETE_VARS,
                 direct_vars = LINUX_DIRECT_VARS,
@@ -398,7 +398,7 @@ cc_library(
             "regexec.c",
             "malloc/dynarray-skeleton.c",
         ],
-        "//conditions:default": [],
+        "@platforms//os:linux": [],
     }),
     visibility = ["//src:__subpackages__"],
     deps = [
