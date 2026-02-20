@@ -2119,7 +2119,7 @@
 /* #undef MIPS_NAN2008_LONG_DOUBLE */
 
 /* Define to 1 on musl libc. */
-/* #undef MUSL_LIBC */
+#define MUSL_LIBC 1
 
 /* Define if the compilation of mktime.c should define 'mktime_internal'. */
 #define NEED_MKTIME_INTERNAL 1
