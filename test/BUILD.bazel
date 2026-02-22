@@ -6,7 +6,7 @@ write_file(
     content = [
         "foobar"
     ],
-    out = "a",
+    out = "a.txt",
 )
 
 write_file(
@@ -14,7 +14,7 @@ write_file(
     content = [
         "moocow"
     ],
-    out = "b",
+    out = "b.txt",
 )
 
 write_file(
@@ -28,7 +28,7 @@ write_file(
         "\\ No newline at end of file",
         "",
     ],
-    out = "expected",
+    out = "expected.txt",
 )
 
 genrule(
@@ -36,7 +36,7 @@ genrule(
     srcs = [":a", ":b"],
     tools = ["//:diff"],
     cmd = "$(execpath //:diff) $(execpath :a) $(execpath :b) > $@ || true",
-    outs = ["patch"],
+    outs = ["patch.patch"],
 )
 
 diff_test(

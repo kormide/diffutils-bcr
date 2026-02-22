@@ -13,6 +13,7 @@ load(
     MACOS_DIRECT_VARS = "DIRECT_VARIABLES",
     MACOS_INLINE_VARS = "INLINE_VARIABLES",
 )
+load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//:utils.bzl", "sed_command")
 
 libdiffutils_a_SOURCES = [
