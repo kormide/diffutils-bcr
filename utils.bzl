@@ -50,7 +50,7 @@ def sed_command(
 
     for key in delete_vars:
         sed_args.append(_DELETE_TEMPLATE.format(key))
-    
+
     command = _CMD_TEMPLATE.format(
         sed,
         "\n".join(sed_args).strip("\\\n"),

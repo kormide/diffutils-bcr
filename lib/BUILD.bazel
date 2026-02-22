@@ -1,4 +1,5 @@
 load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 load(
     "//:config_linux.bzl",
     LINUX_AUTOMAKE_VARS = "AUTOMAKE_VARIABLES",
@@ -13,8 +14,11 @@ load(
     MACOS_DIRECT_VARS = "DIRECT_VARIABLES",
     MACOS_INLINE_VARS = "INLINE_VARIABLES",
 )
-load("@rules_cc//cc:defs.bzl", "cc_library")
 load("//:utils.bzl", "sed_command")
+
+COPTS = [
+    "-w",
+]
 
 libdiffutils_a_SOURCES = [
     "allocator.c",
@@ -264,7 +268,7 @@ BUILT_SOURCES = [
 
 HEADER_TEMPLATES = {
     "alloca.h": "alloca.in.h",
-    "assert.almost.in.h": "assert.in.h", # special case requiring two passes, see :assert_h below
+    "assert.almost.in.h": "assert.in.h",  # special case requiring two passes, see :assert_h below
     "ctype.h": "ctype.in.h",
     "dirent.h": "dirent.in.h",
     "errno.h": "errno.in.h",
@@ -354,7 +358,8 @@ USES_DIRECT_REPLACEMENTS = [
 # content will not be in sed's pattern buffer on the first pass. Since
 # this is the only template that needs two passes, treat it as a special
 # case here rather than generalizing.
-REPLACE_BETWEEN="-e '/@assert.h omit start@/,/@assert.h omit end@/d'"
+REPLACE_BETWEEN = "-e '/@assert.h omit start@/,/@assert.h omit end@/d'"
+
 genrule(
     name = "assert_h",
     srcs = ["assert.almost.in.h"] + MACOS_INLINE_VARS.values(),
@@ -363,12 +368,15 @@ genrule(
         automake_vars = MACOS_AUTOMAKE_VARS,
         delete_vars = MACOS_DELETE_VARS,
         direct_vars = MACOS_DIRECT_VARS,
+        generated_header = False,
         inline_vars = {},
         sed = "@sed",
         template = "assert.almost.in.h",
         use_direct_vars = True,
-        generated_header = False
-    ).replace("> $@", " {} > $@".format(REPLACE_BETWEEN)),
+    ).replace(
+        "> $@",
+        " {} > $@".format(REPLACE_BETWEEN),
+    ),
     tags = ["manual"],
     tools = ["@sed"],
 )
@@ -383,14 +391,17 @@ cc_library(
            BUILT_SOURCES +
            select({
                "@platforms//os:macos": [
-                    # TODO: unclear why the following are needed to avoid
-                    # linking errors on osx. mktime.c should be linked in
-                    # via the dep on :diffutils_a-mktime.
-                    "mktime.c",
-                    "setlocale-lock.c",
+                   # TODO: unclear why the following are needed to avoid
+                   # linking errors on osx. mktime.c should be linked in
+                   # via the dep on :diffutils_a-mktime.
+                   "mktime.c",
+                   "setlocale-lock.c",
                ],
                "@platforms//os:linux": [],
            }),
+    copts = COPTS + [
+        "-DHAVE_CONFIG_H",
+    ],
     includes = ["."],
     textual_hdrs = [
         "xstrtol.c",
@@ -437,6 +448,7 @@ cc_library(
         "uchar.h",
         "wchar.h",
     ],
+    copts = COPTS,
     includes = ["."],
     target_compatible_with = [
         "@platforms//os:macos",
@@ -452,6 +464,7 @@ cc_library(
         "fopen.c",
         "stdio.h",
     ],
+    copts = COPTS,
     includes = ["."],
 )
 
@@ -461,6 +474,7 @@ cc_library(
         "config.h",
         "mbsrtoc32s-state.c",
     ],
+    copts = COPTS,
     includes = ["."],
 )
 
@@ -470,6 +484,7 @@ cc_library(
         "config.h",
         "mbsrtowcs-state.c",
     ],
+    copts = COPTS,
     includes = ["."],
     target_compatible_with = [
         "@platforms//os:linux",
@@ -479,15 +494,16 @@ cc_library(
 cc_library(
     name = "diffutils_a-mktime",
     srcs = [
-        "mktime.c",
         "cdefs.h",
         "config.h",
         "intprops.h",
         "intprops-internal.h",
         "libc-config.h",
+        "mktime.c",
         "mktime-internal.h",
         "stdckdint.h",
     ],
+    copts = COPTS,
     includes = ["."],
 )
 

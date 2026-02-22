@@ -1,7 +1,11 @@
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 
-PACKAGE_VERSION="3.12"
+PACKAGE_VERSION = "3.12"
+
+COPTS = [
+    "-w",
+]
 
 cc_binary(
     name = "diff",
@@ -21,11 +25,12 @@ cc_binary(
         "system.h",
         "util.c",
     ],
+    copts = COPTS,
+    visibility = ["//:__pkg__"],
     deps = [
         ":ver",
         "//lib:diffutils",
     ],
-    visibility = ["//:__pkg__"],
 )
 
 cc_binary(
@@ -36,11 +41,12 @@ cc_binary(
         "system.c",
         "system.h",
     ],
+    copts = COPTS,
+    visibility = ["//:__pkg__"],
     deps = [
         ":ver",
         "//lib:diffutils",
     ],
-    visibility = ["//:__pkg__"],
 )
 
 cc_binary(
@@ -51,11 +57,12 @@ cc_binary(
         "system.c",
         "system.h",
     ],
+    copts = COPTS,
+    visibility = ["//:__pkg__"],
     deps = [
         ":ver",
         "//lib:diffutils",
     ],
-    visibility = ["//:__pkg__"],
 )
 
 cc_binary(
@@ -66,11 +73,12 @@ cc_binary(
         "system.c",
         "system.h",
     ],
+    copts = COPTS,
+    visibility = ["//:__pkg__"],
     deps = [
         ":ver",
         "//lib:diffutils",
     ],
-    visibility = ["//:__pkg__"],
 )
 
 cc_library(
@@ -79,6 +87,7 @@ cc_library(
         "version.c",
         "version.h",
     ],
+    copts = COPTS,
     includes = [
         ".",
     ],
@@ -90,16 +99,16 @@ write_file(
     out = "paths.h",
     content = [
         "#define DEFAULT_DIFF_PROGRAM \"diff\"",
-        "#define LOCALEDIR \"/usr/local/share/locale\""
-    ]
+        "#define LOCALEDIR \"/usr/local/share/locale\"",
+    ],
 )
 
 write_file(
     name = "version_h",
     out = "version.h",
     content = [
-        "extern char const *Version;"
-    ]
+        "extern char const *Version;",
+    ],
 )
 
 write_file(
@@ -108,6 +117,6 @@ write_file(
     content = [
         "#include <config.h>",
         "#include <version.h>",
-        "char const *Version = \"{}\";".format(PACKAGE_VERSION)
-    ]
+        "char const *Version = \"{}\";".format(PACKAGE_VERSION),
+    ],
 )

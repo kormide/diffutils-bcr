@@ -1342,7 +1342,6 @@ AUTOMAKE_VARIABLES = {
 }
 
 DIRECT_VARIABLES = {
-    
     "__glibc_unlikely": "_GL_UNLIKELY",
     "__attribute_nonnull__": "_GL_ATTRIBUTE_NONNULL",
     "__attribute_maybe_unused__": "_GL_ATTRIBUTE_MAYBE_UNUSED",
