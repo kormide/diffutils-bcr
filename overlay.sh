@@ -48,3 +48,5 @@ done
     --arg strip_prefix "diffutils-${VERSION}" \
     --indent 4 \
     '{url: $url, integrity: $integrity, strip_prefix: $strip_prefix, overlay: add}' > "$MODULE/source.json"
+
+cp MODULE.bazel "$MODULE/"
