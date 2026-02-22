@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -p pipefail -o nounset
+set -o errexit -o pipefail -o nounset
 
 HEADER_TEMPLATES=(
     alloca.in.h
@@ -63,6 +63,7 @@ LINUX_HEADERS=(
     pthread.h
     sched.h
     signal.h
+    stdbit.h
     stdio.h
     stdlib.h
     string.h
@@ -154,6 +155,20 @@ LINUX_AUTOMAKE_VARS=(
     @ENOLINK_VALUE@
     @EOVERFLOW_HIDDEN@
     @EOVERFLOW_VALUE@
+    @GL_STDC_BIT_CEIL@
+    @GL_STDC_BIT_FLOOR@
+    @GL_STDC_BIT_WIDTH@
+    @GL_STDC_COUNT_ONES@
+    @GL_STDC_COUNT_ZEROS@
+    @GL_STDC_FIRST_LEADING_ONE@
+    @GL_STDC_FIRST_LEADING_ZERO@
+    @GL_STDC_FIRST_TRAILING_ONE@
+    @GL_STDC_FIRST_TRAILING_ZERO@
+    @GL_STDC_HAS_SINGLE_BIT@
+    @GL_STDC_LEADING_ONES@
+    @GL_STDC_LEADING_ZEROS@
+    @GL_STDC_TRAILING_ONES@
+    @GL_STDC_TRAILING_ZEROS@
     @GNULIBHEADERS_OVERRIDE_CHAR16_T@
     @GNULIBHEADERS_OVERRIDE_CHAR32_T@
     @GNULIBHEADERS_OVERRIDE_CHAR8_T@
@@ -3497,10 +3512,28 @@ MACOS_AUTOMAKE_VARS=(
     @WINT_T_SUFFIX@
 )
 
+PLATFORM="${1:-}"
+if [[ -z "$PLATFORM" ]]; then
+    echo "error: pass platform as first arg"
+    exit 1
+fi
+
+DIFFUTILS_PATH="${2:-}"
+if [[ -z "${DIFFUTILS_PATH}" ]]; then
+    echo "error: pass path to diffutils as second arg"
+    exit 1
+fi
+
+if [[ "$PLATFORM" == "linux" ]]; then
+    HEADERS=("${LINUX_HEADERS[@]}")
+elif [[ "$PLATFORM" == "macos" ]]; then
+    HEADERS=("${MACOS_HEADERS[@]}")
+fi
+
 bazel build //...
 
-for header in "${MACOS_HEADERS[@]}"; do
-    if ! diff "bazel-bin/lib/$header" "../../Downloads/diffutils-3.12/lib/$header" >/dev/null; then
+for header in "${HEADERS[@]}"; do
+    if ! diff "bazel-bin/lib/$header" "$DIFFUTILS_PATH/lib/$header" >/dev/null; then
         echo "$header" is different
     fi
 done
