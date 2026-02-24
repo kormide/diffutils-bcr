@@ -510,9 +510,10 @@ cc_library(
 copy_file(
     name = "config_h",
     src = select({
-        "@platforms//os:macos": "config_macos.h",
         ":is_linux_arm64": "config_linux_arm64.h",
         ":is_linux_amd64": "config_linux_amd64.h",
+        ":is_macos_arm64": "config_macos_arm64.h",
+        ":is_macos_amd64": "config_macos_amd64.h",
     }),
     out = "config.h",
 )
@@ -529,6 +530,22 @@ config_setting(
     name = "is_linux_amd64",
     constraint_values = [
         "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
+)
+
+config_setting(
+    name = "is_macos_arm64",
+    constraint_values = [
+        "@platforms//os:macos",
+        "@platforms//cpu:arm64",
+    ],
+)
+
+config_setting(
+    name = "is_macos_amd64",
+    constraint_values = [
+        "@platforms//os:macos",
         "@platforms//cpu:x86_64",
     ],
 )
