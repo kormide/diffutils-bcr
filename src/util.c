@@ -148,7 +148,7 @@ message (char const *format_msgid, ...)
 	  }
 
       *msg_chain_end = new;
-      new->next = nullptr;
+      new->next = NULL;
       msg_chain_end = &new->next;
     }
   else
@@ -294,7 +294,7 @@ process_signals (void)
       /* Exit or suspend the program.  */
       if (raise (sig) != 0)
 	pfatal_with_name ("raise");
-      xsigprocmask (SIG_SETMASK, &oldset, nullptr);
+      xsigprocmask (SIG_SETMASK, &oldset, NULL);
 
       /* If execution reaches here, then the program has been
          continued (after being suspended).  */
@@ -360,7 +360,7 @@ install_signal_handlers (void)
   for (int j = 0; j < nsigs; j++)
     {
       struct sigaction actj;
-      if (sigaction (sig[j], nullptr, &actj) == 0 && actj.sa_handler != SIG_IGN)
+      if (sigaction (sig[j], NULL, &actj) == 0 && actj.sa_handler != SIG_IGN)
 	xsigaddset (&caught_signals, sig[j]);
     }
 
@@ -372,7 +372,7 @@ install_signal_handlers (void)
     if (xsigismember (&caught_signals, sig[j]))
       {
 	act.sa_handler = is_tstp_index (j) ? stophandler : sighandler;
-	if (sigaction (sig[j], &act, nullptr) != 0)
+	if (sigaction (sig[j], &act, NULL) != 0)
 	  pfatal_with_name ("sigaction");
 	some_signals_caught = true;
       }
@@ -629,7 +629,7 @@ static struct bin_str color_indicator[] =
   {
     { LEN_STR_PAIR ("\033[") },		/* lc: Left of color sequence */
     { LEN_STR_PAIR ("m") },		/* rc: Right of color sequence */
-    { 0, nullptr },			/* ec: End color (replaces lc+rs+rc) */
+    { 0, NULL },			/* ec: End color (replaces lc+rs+rc) */
     { LEN_STR_PAIR ("0") },		/* rs: Reset to ordinary colors */
     { LEN_STR_PAIR ("1") },		/* hd: Header */
     { LEN_STR_PAIR ("32") },		/* ad: Add line */
@@ -639,7 +639,7 @@ static struct bin_str color_indicator[] =
 
 static const char *const indicator_name[] =
   {
-    "lc", "rc", "ec", "rs", "hd", "ad", "de", "ln", nullptr
+    "lc", "rc", "ec", "rs", "hd", "ad", "de", "ln", NULL
   };
 ARGMATCH_VERIFY (indicator_name, color_indicator);
 
@@ -660,10 +660,10 @@ parse_diff_color (void)
      and pacifies Coverity.  The output is no larger than the input.  */
   char *buf = color_palette;
   char const *p = buf;
-  if (p == nullptr || *p == '\0')
+  if (p == NULL || *p == '\0')
     return;
   /* Do not process the color palette twice.  */
-  color_palette = nullptr;
+  color_palette = NULL;
 
   char label[] = "??";		/* Indicator label */
 
@@ -709,7 +709,7 @@ parse_diff_color (void)
           state = PS_FAIL;	/* Assume failure...  */
           if (*(p++) == '=')/* It *should* be...  */
             {
-              for (int ind_no = 0; indicator_name[ind_no] != nullptr; ind_no++)
+              for (int ind_no = 0; indicator_name[ind_no] != NULL; ind_no++)
                 {
                   if (STREQ (label, indicator_name[ind_no]))
                     {
@@ -783,7 +783,7 @@ setup_output (char const *name0, char const *name1, bool recursive)
   current_name[0] = name0;
   current_name[1] = name1;
   currently_recursive = recursive;
-  outfile = nullptr;
+  outfile = NULL;
 }
 
 #if HAVE_WORKING_FORK
@@ -824,7 +824,7 @@ begin_output (void)
       if (fflush (stdout) != 0)
         pfatal_with_name (_("write failed"));
 
-      char const *argv[4] = {pr_program, "-h", name, nullptr };
+      char const *argv[4] = {pr_program, "-h", name, NULL };
 
       /* Make OUTFILE a pipe to a subsidiary 'pr'.  */
 #if HAVE_WORKING_FORK
@@ -926,7 +926,7 @@ finish_output (void)
 	       quote (pr_program), status);
     }
 
-  outfile = nullptr;
+  outfile = NULL;
 }
 
 /* Find the consecutive changes at the start of the script START.
@@ -965,7 +965,7 @@ print_script (struct change *script,
       /* Disconnect them from the rest of the changes,
          making them a hunk, and remember the rest for next iteration.  */
       next = end->link;
-      end->link = nullptr;
+      end->link = NULL;
 #ifdef DEBUG
       debug_script (this);
 #endif
@@ -1000,7 +1000,7 @@ print_1_line_nl (char const *line_flag, char const *const *line, bool skip_nl)
 {
   char const *base = line[0], *limit = line[1]; /* Help the compiler.  */
   FILE *out = outfile; /* Help the compiler some more.  */
-  char const *flag_format = nullptr;
+  char const *flag_format = NULL;
 
   /* If -T was specified, use a Tab between the line-flag and the text.
      Otherwise use a Space (as Unix diff does).
@@ -1292,7 +1292,7 @@ analyze_hunk (struct change *hunk,
 	      }
           if (newline - p != trivial_length
               && (! ignore_regexp.fastmap
-                  || (re_search (&ignore_regexp, line, len, 0, len, nullptr)
+                  || (re_search (&ignore_regexp, line, len, 0, len, NULL)
 		      < 0)))
             trivial = false;
         }
@@ -1318,7 +1318,7 @@ analyze_hunk (struct change *hunk,
 	      }
           if (newline - p != trivial_length
               && (! ignore_regexp.fastmap
-                  || (re_search (&ignore_regexp, line, len, 0, len, nullptr)
+                  || (re_search (&ignore_regexp, line, len, 0, len, NULL)
 		      < 0)))
             trivial = false;
         }

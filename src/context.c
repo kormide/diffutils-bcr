@@ -199,7 +199,7 @@ pr_context_hunk (struct change *hunk)
     last1 = curr.file[1].valid_lines - 1;
 
   /* If desired, find the preceding function definition line in file 0.  */
-  char const *function = nullptr;
+  char const *function = NULL;
   if (function_regexp.fastmap)
     function = find_function (curr.file[0].linbuf, first0);
 
@@ -342,7 +342,7 @@ pr_unidiff_hunk (struct change *hunk)
     last1 = curr.file[1].valid_lines - 1;
 
   /* If desired, find the preceding function definition line in file 0.  */
-  char const *function = nullptr;
+  char const *function = NULL;
   if (function_regexp.fastmap)
     function = find_function (curr.file[0].linbuf, first0);
 
@@ -376,7 +376,7 @@ pr_unidiff_hunk (struct change *hunk)
 	  char const *const *line = &curr.file[0].linbuf[i++];
           if (! (suppress_blank_empty && **line == '\n'))
             putc (initial_tab ? '\t' : ' ', out);
-          print_1_line (nullptr, line);
+          print_1_line (NULL, line);
           j++;
         }
       else
@@ -392,7 +392,7 @@ pr_unidiff_hunk (struct change *hunk)
               putc ('-', out);
               if (initial_tab && ! (suppress_blank_empty && **line == '\n'))
                 putc ('\t', out);
-              print_1_line_nl (nullptr, line, true);
+              print_1_line_nl (NULL, line, true);
 
               set_color_context (RESET_CONTEXT);
 
@@ -411,7 +411,7 @@ pr_unidiff_hunk (struct change *hunk)
               putc ('+', out);
               if (initial_tab && ! (suppress_blank_empty && **line == '\n'))
                 putc ('\t', out);
-              print_1_line_nl (nullptr, line, true);
+              print_1_line_nl (NULL, line, true);
 
               set_color_context (RESET_CONTEXT);
 
@@ -471,7 +471,7 @@ mark_ignorable (struct change *script)
       struct change *next = script->link;
 
       /* Turn this change into a hunk: detach it from the others.  */
-      script->link = nullptr;
+      script->link = NULL;
 
       /* Determine whether this change is ignorable.  */
       lin first0, last0, first1, last1;
@@ -507,7 +507,7 @@ find_function (char const *const *linbuf, lin linenum)
 	 to LEN = LINELEN and no machine code is generated.  */
       regoff_t len = MIN (linelen, TYPE_MAXIMUM (regoff_t));
 
-      if (0 <= re_search (&function_regexp, line, len, 0, len, nullptr))
+      if (0 <= re_search (&function_regexp, line, len, 0, len, NULL))
         {
           find_function_last_match = i;
           return line;
@@ -518,5 +518,5 @@ find_function (char const *const *linbuf, lin linenum)
   if (find_function_last_match != LIN_MAX)
     return linbuf[find_function_last_match];
 
-  return nullptr;
+  return NULL;
 }

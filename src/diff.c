@@ -245,10 +245,10 @@ static struct option const longopts[] =
   {"width", 1, 0, 'W'},
 
   /* This is solely for diff3.  Do not document.  */
-  {"-no-directory", no_argument, nullptr, NO_DIRECTORY_OPTION},
+  {"-no-directory", no_argument, NULL, NO_DIRECTORY_OPTION},
 
   /* This is solely for testing.  Do not document.  */
-  {"-presume-output-tty", no_argument, nullptr, PRESUME_OUTPUT_TTY_OPTION},
+  {"-presume-output-tty", no_argument, NULL, PRESUME_OUTPUT_TTY_OPTION},
   {0, 0, 0, 0}
 };
 
@@ -305,7 +305,7 @@ main (int argc, char **argv)
   bindtextdomain (PACKAGE, LOCALEDIR);
   bindtextdomain ("gnulib", GNULIB_LOCALEDIR);
   textdomain (PACKAGE);
-  c_stack_action (nullptr);
+  c_stack_action (NULL);
   function_regexp_list.buf = &function_regexp;
   ignore_regexp_list.buf = &ignore_regexp;
   re_set_syntax (RE_SYNTAX_GREP | RE_NO_POSIX_BACKTRACKING);
@@ -319,11 +319,11 @@ main (int argc, char **argv)
   bool explicit_context = false;
   intmax_t width = 0;
   bool show_c_function = false;
-  char const *from_file = nullptr;
-  char const *to_file = nullptr;
+  char const *from_file = NULL;
+  char const *to_file = NULL;
 
   for (int prev = -1, c;
-       0 <= (c = getopt_long (argc, argv, shortopts, longopts, nullptr));
+       0 <= (c = getopt_long (argc, argv, shortopts, longopts, NULL));
        prev = c)
     switch (c)
       {
@@ -492,7 +492,7 @@ main (int argc, char **argv)
 
       case 'l':
 	if (!pr_program[0])
-	  try_help ("pagination not supported on this host", nullptr);
+	  try_help ("pagination not supported on this host", NULL);
 	paginate = true;
 #ifdef SIGCHLD
 	/* Pagination requires forking and waiting, and
@@ -559,7 +559,7 @@ main (int argc, char **argv)
 
       case 'v':
 	version_etc (stdout, PROGRAM_NAME, PACKAGE_NAME, Version,
-		     AUTHORS, nullptr);
+		     AUTHORS, NULL);
 	check_stdout ();
 	return EXIT_SUCCESS;
 
@@ -725,7 +725,7 @@ main (int argc, char **argv)
 	break;
 
       default:
-	try_help (nullptr, nullptr);
+	try_help (NULL, NULL);
       }
 
   if (colors_style == AUTO)
@@ -1060,7 +1060,7 @@ static char const *const option_help_msgid[] = {
   N_("If --from-file or --to-file is given, there are no restrictions on FILE(s)."),
   N_("If a FILE is '-', read standard input."),
   N_("Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."),
-  nullptr
+  NULL
 };
 
 static void
@@ -1102,7 +1102,7 @@ specify_value (char const **var, char const *value, char const *option)
   if (*var && ! STREQ (*var, value))
     {
       error (0, 0, _("conflicting %s option value %s"), option, quote (value));
-      try_help (nullptr, nullptr);
+      try_help (NULL, NULL);
     }
   *var = value;
 }
@@ -1114,7 +1114,7 @@ specify_style (enum output_style style)
   if (output_style != style)
     {
       if (output_style != OUTPUT_UNSPECIFIED)
-        try_help ("conflicting output style options", nullptr);
+        try_help ("conflicting output style options", NULL);
       output_style = style;
     }
 }
@@ -1123,7 +1123,7 @@ specify_style (enum output_style style)
 static void
 specify_colors_style (char const *value)
 {
-  if (value == nullptr || STREQ (value, "auto"))
+  if (value == NULL || STREQ (value, "auto"))
     colors_style = AUTO;
   else if (STREQ (value, "always"))
     colors_style = ALWAYS;
@@ -1250,7 +1250,7 @@ compare_prepped_files (struct comparison const *parent,
       dassert (no_dereference_symlinks);
 
       int status = EXIT_SUCCESS;
-      char *link_value[2]; link_value[1] = nullptr;
+      char *link_value[2]; link_value[1] = NULL;
       char linkbuf[2][128];
 
       for (bool f = false; ; f = true)
@@ -1264,7 +1264,7 @@ compare_prepped_files (struct comparison const *parent,
 				 : "");
 	  link_value[f] = careadlinkat (dirarg, namearg,
 					linkbuf[f], sizeof linkbuf[f],
-					nullptr, readlinkat);
+					NULL, readlinkat);
 	  if (!link_value[f])
 	    {
 	      perror_with_name (cmp->file[f].name);
@@ -1427,17 +1427,17 @@ compare_files (struct comparison const *parent, enum detype const detype[2],
 
   if (toplevel)
     {
-      free0 = nullptr;
-      free1 = nullptr;
+      free0 = NULL;
+      free1 = NULL;
       cmp.file[0].name = name0;
       cmp.file[1].name = name1;
     }
   else
     {
       cmp.file[0].name = free0
-        = file_name_concat (parent->file[0].name, name0, nullptr);
+        = file_name_concat (parent->file[0].name, name0, NULL);
       cmp.file[1].name = free1
-        = file_name_concat (parent->file[1].name, name1, nullptr);
+        = file_name_concat (parent->file[1].name, name1, NULL);
     }
 
   int oflags = ((binary ? O_BINARY : 0) | O_CLOEXEC

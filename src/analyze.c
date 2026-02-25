@@ -371,7 +371,7 @@ add_change (lin line0, lin line1, lin deleted, lin inserted,
 static struct change *
 build_reverse_script (struct file_data const filevec[])
 {
-  struct change *script = nullptr;
+  struct change *script = NULL;
   bool *changed0 = filevec[0].changed;
   bool *changed1 = filevec[1].changed;
   lin len0 = filevec[0].buffered_lines;
@@ -408,7 +408,7 @@ build_reverse_script (struct file_data const filevec[])
 static struct change *
 build_script (struct file_data const filevec[])
 {
-  struct change *script = nullptr;
+  struct change *script = NULL;
   bool *changed0 = filevec[0].changed;
   bool *changed1 = filevec[1].changed;
   lin i0 = filevec[0].buffered_lines, i1 = filevec[1].buffered_lines;

@@ -264,7 +264,7 @@ new_exclude_segment (struct exclude *ex, enum exclude_type type, int options)
       break;
 
     case exclude_hash:
-      sp->v.table = hash_initialize (0, nullptr,
+      sp->v.table = hash_initialize (0, NULL,
                                      (options & FNM_CASEFOLD
                                       ? string_hasher_ci
                                       : string_hasher),
@@ -390,7 +390,7 @@ exclude_patopts (struct patopts const *opts, char const *f)
   int options = opts->options;
 
   return (options & EXCLUDE_REGEX
-          ? regexec (&opts->v.re, f, 0, nullptr, 0) == 0
+          ? regexec (&opts->v.re, f, 0, NULL, 0) == 0
           : exclude_fnmatch (opts->v.pattern, f, options));
 }
 
@@ -463,7 +463,7 @@ excluded_file_name (struct exclude const *ex, char const *f)
     return false;
 
   bool invert = false;
-  char *filename = nullptr;
+  char *filename = NULL;
 
   /* Scan through the segments, reporting the status of the first match.
      The segments are in reverse order, so this reports the status of
@@ -593,7 +593,7 @@ add_exclude_fp (void (*add_func) (struct exclude *, char const *, int, void *),
                 struct exclude *ex, FILE *fp, int options,
                 char line_end, void *data)
 {
-  char *buf = nullptr;
+  char *buf = NULL;
   idx_t buf_alloc = 0;
   idx_t buf_count = 0;
 

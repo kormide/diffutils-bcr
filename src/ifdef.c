@@ -155,8 +155,8 @@ format_group (FILE *out, char const *format, char endchar,
                 }
 
 	      bool equal_values = value[0] == value[1];
-              FILE *thenout = equal_values ? out : nullptr;
-	      FILE *elseout = equal_values ? nullptr : out;
+              FILE *thenout = equal_values ? out : NULL;
+	      FILE *elseout = equal_values ? NULL : out;
               f = format_group (thenout, f, ':', groups);
               if (*f)
                 {
@@ -183,7 +183,7 @@ format_group (FILE *out, char const *format, char endchar,
             continue;
 
           default:
-            f = do_printf_spec (out, f - 2, nullptr, 0, groups);
+            f = do_printf_spec (out, f - 2, NULL, 0, groups);
             if (f)
               continue;
             /* Fall through. */
@@ -277,16 +277,16 @@ print_ifdef_lines (FILE *out, char const *format,
                 output_1_line (linbuf[from],
                                (linbuf[from + 1]
                                 - (linbuf[from + 1][-1] == '\n')),
-                               nullptr, nullptr);
+                               NULL, NULL);
                 continue;
 
               case 'L':
                 output_1_line (linbuf[from], linbuf[from + 1],
-			       nullptr, nullptr);
+			       NULL, NULL);
                 continue;
 
               default:
-                f = do_printf_spec (out, f - 2, file, from, nullptr);
+                f = do_printf_spec (out, f - 2, file, from, NULL);
                 if (f)
                   continue;
                 c = '%';
@@ -324,13 +324,13 @@ do_printf_spec (FILE *out, char const *spec,
     {
     case 'c':
       if (c1 != '\'')
-        return nullptr;
+        return NULL;
       else
         {
           char value;
           f = scan_char_literal (f, &value);
           if (!f)
-            return nullptr;
+            return NULL;
           if (out)
             putc (value, out);
         }
@@ -343,14 +343,14 @@ do_printf_spec (FILE *out, char const *spec,
         if (file)
           {
             if (c1 != 'n')
-              return nullptr;
+              return NULL;
             value = translate_line_number (file, n);
           }
         else
           {
             value = groups_letter_value (groups, c1);
             if (value < 0)
-              return nullptr;
+              return NULL;
           }
 
         if (out)
@@ -371,7 +371,7 @@ do_printf_spec (FILE *out, char const *spec,
       break;
 
     default:
-      return nullptr;
+      return NULL;
     }
 
   return f;
@@ -392,7 +392,7 @@ scan_char_literal (char const *lit, char *valptr)
     {
       case 0:
       case '\'':
-        return nullptr;
+        return NULL;
 
       case '\\':
         value = '\0';
@@ -400,18 +400,18 @@ scan_char_literal (char const *lit, char *valptr)
           {
             unsigned int digit = c - '0';
             if (8 <= digit)
-              return nullptr;
+              return NULL;
             value = 8 * value + digit;
           }
         ptrdiff_t digits = p - lit - 2;
         if (! (1 <= digits && digits <= 3))
-          return nullptr;
+          return NULL;
         break;
 
       default:
         value = c;
         if (*p++ != '\'')
-          return nullptr;
+          return NULL;
         break;
     }
 

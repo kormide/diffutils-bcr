@@ -150,7 +150,7 @@ static void
 specify_comparison_type (enum comparison_type t)
 {
   if (comparison_type && comparison_type != t)
-    try_help ("options -l and -s are incompatible", nullptr);
+    try_help ("options -l and -s are incompatible", NULL);
   comparison_type = t;
 }
 
@@ -173,7 +173,7 @@ static char const *const option_help_msgid[] = {
   N_("-s, --quiet, --silent      suppress all normal output"),
   N_("    --help                 display this help and exit"),
   N_("-v, --version              output version information and exit"),
-  nullptr
+  NULL
 };
 
 static void
@@ -210,13 +210,13 @@ main (int argc, char **argv)
   bindtextdomain (PACKAGE, LOCALEDIR);
   bindtextdomain ("gnulib", GNULIB_LOCALEDIR);
   textdomain (PACKAGE);
-  c_stack_action (nullptr);
+  c_stack_action (NULL);
   xstdopen ();
 
   /* Parse command line options.  */
 
   for (int c;
-       0 <= (c = getopt_long (argc, argv, shortopts, longopts, nullptr)); )
+       0 <= (c = getopt_long (argc, argv, shortopts, longopts, NULL)); )
     switch (c)
       {
       case 'b':
@@ -239,7 +239,7 @@ main (int argc, char **argv)
       case 'n':
         {
           intmax_t n;
-	  strtol_error e = xstrtoimax (optarg, nullptr, 0, &n, valid_suffixes);
+	  strtol_error e = xstrtoimax (optarg, NULL, 0, &n, valid_suffixes);
 	  if ((e & ~LONGINT_OVERFLOW) != LONGINT_OK || n < 0)
 	    try_help ("invalid --bytes value %s", quote (optarg));
 	  bytes = MIN (bytes, n);
@@ -252,7 +252,7 @@ main (int argc, char **argv)
 
       case 'v':
         version_etc (stdout, PROGRAM_NAME, PACKAGE_NAME, Version,
-                     AUTHORS, nullptr);
+                     AUTHORS, NULL);
         check_stdout ();
         return EXIT_SUCCESS;
 
@@ -262,7 +262,7 @@ main (int argc, char **argv)
         return EXIT_SUCCESS;
 
       default:
-        try_help (nullptr, nullptr);
+        try_help (NULL, NULL);
       }
 
   if (optind == argc)

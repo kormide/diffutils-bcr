@@ -198,7 +198,7 @@ static char const *const option_help_msgid[] = {
   "",
   N_("    --help                   display this help and exit"),
   N_("-v, --version                output version information and exit"),
-  nullptr
+  NULL
 };
 
 static void
@@ -517,7 +517,7 @@ main (int argc, char *argv[])
 
       case 'v':
 	version_etc (stdout, PROGRAM_NAME, PACKAGE_NAME, Version,
-		     AUTHORS, nullptr);
+		     AUTHORS, NULL);
 	check_stdout ();
 	return EXIT_SUCCESS;
 
@@ -553,7 +553,7 @@ main (int argc, char *argv[])
 	break;
 
       default:
-	try_help (nullptr, nullptr);
+	try_help (NULL, NULL);
       }
 
   if (argc - optind != 2)
@@ -573,7 +573,7 @@ main (int argc, char *argv[])
       diffarg ("--");
       diffarg (argv[optind]);
       diffarg (argv[optind + 1]);
-      diffarg (nullptr);
+      diffarg (NULL);
       execvp (diffargv[0], (char **) diffargv);
       perror_fatal (squote (0, diffargv[0]));
     }
@@ -597,7 +597,7 @@ main (int argc, char *argv[])
       diffarg ("--");
       diffarg (argv[optind]);
       diffarg (argv[optind + 1]);
-      diffarg (nullptr);
+      diffarg (NULL);
 
       trapsigs ();
 
@@ -681,7 +681,7 @@ main (int argc, char *argv[])
         if (tmpname)
           {
             unlink (tmpname);
-            tmpname = nullptr;
+            tmpname = NULL;
           }
 
         if (! interact_ok)
@@ -750,7 +750,7 @@ trapsigs (void)
   for (int i = 0;  i < NUM_SIGS;  i++)
     {
 #if HAVE_SIGACTION
-      sigaction (sigs[i], nullptr, &initial_action[i]);
+      sigaction (sigs[i], NULL, &initial_action[i]);
 #else
       initial_action[i] = signal (sigs[i], SIG_IGN);
 #endif
@@ -775,7 +775,7 @@ untrapsig (int s)
       if ((! s || sigs[i] == s)  &&  initial_handler (i) != SIG_IGN)
         {
 #if HAVE_SIGACTION
-          sigaction (sigs[i], &initial_action[i], nullptr);
+          sigaction (sigs[i], &initial_action[i], NULL);
 #else
           signal (sigs[i], initial_action[i]);
 #endif
@@ -1000,7 +1000,7 @@ edit (struct line_filter *left, char const *lname, lin lline, lin llen,
 
           ignore_SIGINT = true;
           checksigs ();
-          char *argv[] = { (char *) editor_program, tmpname, nullptr };
+          char *argv[] = { (char *) editor_program, tmpname, NULL };
           int wstatus;
           int werrno = 0;
 #if ! HAVE_WORKING_FORK

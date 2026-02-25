@@ -77,8 +77,8 @@ dir_read (int parentdirfd, struct file_data *dir, struct dirdata *dirdata,
   /* Allocated and used storage for file name data.  */
   char *data;
 
-  dirdata->names = nullptr;
-  dirdata->data = nullptr;
+  dirdata->names = NULL;
+  dirdata->data = NULL;
 
   if (dir->desc != NONEXISTENT)
     {
@@ -177,7 +177,7 @@ dir_read (int parentdirfd, struct file_data *dir, struct dirdata *dirdata,
       names[i] = data;
       data += strlen (data) + 1;
     }
-  names[nnames] = nullptr;
+  names[nnames] = NULL;
   return true;
 }
 
@@ -253,7 +253,7 @@ diff_dirs (struct comparison *cmp)
   int val = EXIT_SUCCESS;
   for (int i = 0; i < 2; i++)
     if (! dir_read (cmp->parent->file[i].desc, &cmp->file[i], &dirdata[i],
-		    cmp->parent == &noparent ? starting_file : nullptr, false))
+		    cmp->parent == &noparent ? starting_file : NULL, false))
       {
         perror_with_name (cmp->file[i].name);
         val = EXIT_TROUBLE;
@@ -317,8 +317,8 @@ diff_dirs (struct comparison *cmp)
 	    = { HAVE_STRUCT_DIRENT_D_TYPE && *n0 ? (*n0)[-1] : DE_UNKNOWN,
 		HAVE_STRUCT_DIRENT_D_TYPE && *n1 ? (*n1)[-1] : DE_UNKNOWN };
 	  int v1 = compare_files (cmp, detypes,
-				  0 < nameorder ? nullptr : *n0++,
-				  nameorder < 0 ? nullptr : *n1++);
+				  0 < nameorder ? NULL : *n0++,
+				  nameorder < 0 ? NULL : *n1++);
           if (val < v1)
             val = v1;
         }
@@ -353,8 +353,8 @@ find_dir_file_pathname (struct file_data *dir, char const *file,
   char const *match = file;
 
   struct dirdata dirdata;
-  dirdata.names = nullptr;
-  dirdata.data = nullptr;
+  dirdata.names = NULL;
+  dirdata.data = NULL;
 
   if (ignore_file_name_case && dir_read (AT_FDCWD, dir, &dirdata, file, true))
     for (char const **p = dirdata.names; *p; p++)
@@ -369,7 +369,7 @@ find_dir_file_pathname (struct file_data *dir, char const *file,
       }
 
   *detype = HAVE_STRUCT_DIRENT_D_TYPE && match != file ? match[-1] : DE_UNKNOWN;
-  char *val = file_name_concat (dir->name, match, nullptr);
+  char *val = file_name_concat (dir->name, match, NULL);
   free (dirdata.names);
   free (dirdata.data);
   return val;

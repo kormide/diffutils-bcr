@@ -30,7 +30,7 @@
 # include <windows.h>
 
 int
-getpagesize (void)
+getpagesize ()
 {
   SYSTEM_INFO system_info;
   GetSystemInfo (&system_info);

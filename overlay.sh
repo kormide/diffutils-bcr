@@ -21,6 +21,7 @@ FILES=(
     BUILD.bazel
     config_linux.bzl
     config_macos.bzl
+    config_windows.bzl
     lib/BUILD.bazel
     lib/config_linux_amd64.h
     lib/config_linux_arm64.h
