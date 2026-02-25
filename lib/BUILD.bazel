@@ -450,8 +450,8 @@ cc_library(
     ],
     copts = COPTS,
     includes = ["."],
-    target_compatible_with = [
-        "@platforms//os:macos",
+    tags = [
+        "manual",
     ],
     textual_hdrs = ["fnmatch_loop.c"],
 )
@@ -486,8 +486,8 @@ cc_library(
     ],
     copts = COPTS,
     includes = ["."],
-    target_compatible_with = [
-        "@platforms//os:linux",
+    tags = [
+        "manual",
     ],
 )
 

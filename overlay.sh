@@ -24,7 +24,8 @@ FILES=(
     lib/BUILD.bazel
     lib/config_linux_amd64.h
     lib/config_linux_arm64.h
-    lib/config_macos.h
+    lib/config_macos_amd64.h
+    lib/config_macos_arm64.h
     src/BUILD.bazel
     test/BUILD.bazel
     utils.bzl
